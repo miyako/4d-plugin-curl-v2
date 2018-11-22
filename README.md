@@ -409,7 +409,7 @@ unescape:=cURL_Unescape(url)
 Parameter|Type|Description
 ------------|------------|----
 url|TEXT|
-unescape|TEXT|``curl_easy_unescape``
+unescape|TEXT|[``curl_easy_unescape``]
 
 ```
 versionInfo:=cURL_VersionInfo
@@ -417,7 +417,7 @@ versionInfo:=cURL_VersionInfo
 
 Parameter|Type|Description
 ------------|------------|----
-version|TEXT|``curl_version_info``
+version|TEXT|[``curl_version_info``](https://curl.haxx.se/libcurl/c/curl_version_info.html)
 
 ```json
 {
