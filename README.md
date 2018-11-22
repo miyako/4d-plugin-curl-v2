@@ -293,6 +293,7 @@ Value|Type|Description
 Not supported
 
 ``VERBOSE``  
+``NOPROGRESS``  
 ``READFUNCTION``  
 ``WRITEFUNCTION``  
 ``ERRORBUFFER``  
