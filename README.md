@@ -246,7 +246,7 @@ Value|Type|Description
 [SSL_ENABLE_ALPN](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_ENABLE_ALPN.html) |LONGINT|
 [EXPECT_100_TIMEOUT_MS](https://curl.haxx.se/libcurl/c/CURLOPT_EXPECT_100_TIMEOUT_MS.html) |LONGINT|
 [HEADEROPT](https://curl.haxx.se/libcurl/c/CURLOPT_HEADEROPT.html) |LONGINT|
-[PINNEDPUBLICKEY](https://curl.haxx.se/libcurl/c/CURLOPT_PINNEDPUBLICKEY.html) |TEXT|path or string
+[PINNEDPUBLICKEY](https://curl.haxx.se/libcurl/c/CURLOPT_PINNEDPUBLICKEY.html) |TEXT|path or value
 [SSL_VERIFYSTATUS](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYSTATUS.html) |LONGINT|
 [SSL_FALSESTART](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_FALSESTART.html) |LONGINT|
 [PATH_AS_IS](https://curl.haxx.se/libcurl/c/CURLOPT_PATH_AS_IS.html) |LONGINT|
@@ -310,17 +310,17 @@ Standard  ``options`` with collection support
 
 Value|Type|Description
 ------------|------------|----
-[CONNECT_TO](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECT_TO.html) |COLLECTION|string array
-[PROXYHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYHEADER.html) |COLLECTION|string array
-[HTTPHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPHEADER.html) |COLLECTION|string array
-[HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|string array
-[RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|string array
-[MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|string array
-[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|string array
-[PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|string array
-[POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|string array
-[QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|string array
-[TELNETOPTIONS](https://curl.haxx.se/libcurl/c/CURLOPT_TELNETOPTIONS.html) |COLLECTION|string array
+[CONNECT_TO](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECT_TO.html) |COLLECTION|text array
+[PROXYHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYHEADER.html) |COLLECTION|text array
+[HTTPHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPHEADER.html) |COLLECTION|text array
+[HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|text array
+[RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|text array
+[MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|text array
+[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|text array
+[PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|text array
+[POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|text array
+[QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|text array
+[TELNETOPTIONS](https://curl.haxx.se/libcurl/c/CURLOPT_TELNETOPTIONS.html) |COLLECTION|text array
 
 ---
 
