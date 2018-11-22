@@ -107,6 +107,20 @@ Standard  ``options``
 
 Value|Type|Description
 ------------|------------|----
+[URL](https://curl.haxx.se/libcurl/c/CURLOPT_URL.html) |TEXT|
+[PORT](https://curl.haxx.se/libcurl/c/CURLOPT_PORT.html) |LONGINT|
+[PROXY](https://curl.haxx.se/libcurl/c/CURLOPT_PROXY.html) |TEXT|
+[USERPWD](https://curl.haxx.se/libcurl/c/CURLOPT_USERPWD.html) |TEXT|
+[PROXYUSERPWD](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYUSERPWD.html) |TEXT|
+[RANGE](https://curl.haxx.se/libcurl/c/CURLOPT_RANGE.html) |TEXT|
+[TIMEOUT](https://curl.haxx.se/libcurl/c/CURLOPT_TIMEOUT.html) |LONGINT|
+[REFERER](https://curl.haxx.se/libcurl/c/CURLOPT_REFERER.html) |TEXT|
+[FTPPORT](https://curl.haxx.se/libcurl/c/CURLOPT_FTPPORT.html) |TEXT|
+[USERAGENT](https://curl.haxx.se/libcurl/c/CURLOPT_USERAGENT.html) |TEXT|
+[LOW_SPEED_LIMIT](https://curl.haxx.se/libcurl/c/CURLOPT_LOW_SPEED_LIMIT.html) |LONGINT|
+[LOW_SPEED_TIME](https://curl.haxx.se/libcurl/c/CURLOPT_LOW_SPEED_TIME.html) |LONGINT|
+[RESUME_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_RESUME_FROM.html) |LONGINT|
+[COOKIE](https://curl.haxx.se/libcurl/c/CURLOPT_COOKIE.html) |TEXT|
 [SSLCERT](https://curl.haxx.se/libcurl/c/CURLOPT_SSLCERT.html) |TEXT|path
 [KEYPASSWD](https://curl.haxx.se/libcurl/c/CURLOPT_KEYPASSWD.html) |TEXT|
 [CRLF](https://curl.haxx.se/libcurl/c/CURLOPT_CRLF.html) |LONGINT|
@@ -274,6 +288,11 @@ Value|Type|Description
 
 Not implemented
 
+``READFUNCTION``  
+``WRITEFUNCTION``  
+``ERRORBUFFER``  
+``READDATA``  
+``WRITEDATA``  
 ``OBSOLETE72``  
 ``PROGRESSDATA``  
 ``PROGRESSFUNCTION``  
