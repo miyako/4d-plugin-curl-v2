@@ -454,3 +454,13 @@ version|TEXT|[``curl_version_info``](https://curl.haxx.se/libcurl/c/curl_version
 	"libssh_version": "libssh2/1.8.0"
 }
 ```
+
+```
+seconds:=cURL_GetDate(dateString{;secondsString})
+```
+
+Parameter|Type|Description
+------------|------------|----
+dateString|TEXT|
+seconds|LONGINT|[``curl_getdate``](https://curl.haxx.se/libcurl/c/curl_getdate.html)
+secondsString|TEXT|out
