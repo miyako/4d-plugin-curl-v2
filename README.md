@@ -292,6 +292,38 @@ Value|Type|Description
 
 ---
 
+Standard  ``options`` with constant support
+
+Value|Type|Description
+------------|------------|----
+[USE_SSL](https://curl.haxx.se/libcurl/c/CURLOPT_USE_SSL.html) |TEXT|USESSL_NONE, USESSL_TRY, USESSL_CONTROL, USESSL_ALL
+[SSLVERSION](https://curl.haxx.se/libcurl/c/CURLOPT_SSLVERSION.html) |TEXT|SSLVERSION_TLSv1, SSLVERSION_SSLv2, SSLVERSION_SSLv3, SSLVERSION_TLSv1_0, SSLVERSION_TLSv1_1, SSLVERSION_TLSv1_2, SSLVERSION_TLSv1_3
+[HTTP_VERSION](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP_VERSION.html) |TEXT|HTTP_VERSION_1_0, HTTP_VERSION_1_1, HTTP_VERSION_2_0, HTTP_VERSION_2TLS, HTTP_VERSION_2_PRIOR_KNOWLEDGE
+[PROXY_SSLVERSION](https://curl.haxx.se/libcurl/c/CURLOPT_PROXY_SSLVERSION.html) |TEXT|SSLVERSION_TLSv1, SSLVERSION_SSLv2, SSLVERSION_SSLv3, SSLVERSION_TLSv1_0, SSLVERSION_TLSv1_1, SSLVERSION_TLSv1_2, SSLVERSION_TLSv1_3
+[TIMECONDITION](https://curl.haxx.se/libcurl/c/CURLOPT_TIMECONDITION.html) |TEXT|TIMECOND_IFMODSINCE, TIMECOND_IFUNMODSINCE, TIMECOND_LASTMOD
+[PROXYTYPE](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYTYPE.html) |TEXT|PROXY_HTTPS, PROXY_SOCKS4, PROXY_SOCKS4A, PROXY_SOCKS5
+[FTPSSLAUTH](https://curl.haxx.se/libcurl/c/CURLOPT_FTPSSLAUTH.html) |TEXT|FTPAUTH_SSL, FTPAUTH_TLS
+
+---
+
+Standard  ``options`` with collection support
+
+Value|Type|Description
+------------|------------|----
+[CONNECT_TO](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECT_TO.html) |COLLECTION|string array
+[PROXYHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYHEADER.html) |COLLECTION|string array
+[HTTPHEADER](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPHEADER.html) |COLLECTION|string array
+[HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|string array
+[RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|string array
+[MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|string array
+[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|string array
+[PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|string array
+[POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|string array
+[QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|string array
+[TELNETOPTIONS](https://curl.haxx.se/libcurl/c/CURLOPT_TELNETOPTIONS.html) |COLLECTION|string array
+
+---
+
 Not supported
 
 ``POSTFIELDSIZE_LARGE`` (automatic)  
