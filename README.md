@@ -292,6 +292,7 @@ Value|Type|Description
 
 Not supported
 
+``POSTFIELDS``  
 ``VERBOSE``  
 ``NOPROGRESS``  
 ``READFUNCTION``  
