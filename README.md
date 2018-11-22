@@ -107,6 +107,19 @@ Standard  ``options``
 
 Value|Type|Description
 ------------|------------|----
+[CONNECTTIMEOUT](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html) |LONGINT|
+[HTTPGET](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPGET.html) |LONGINT|
+[SSL_VERIFYHOST](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html) |LONGINT|
+[COOKIEJAR](https://curl.haxx.se/libcurl/c/CURLOPT_COOKIEJAR.html) |TEXT|path
+[SSL_CIPHER_LIST](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_CIPHER_LIST.html) |TEXT|
+[FTP_USE_EPSV](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_USE_EPSV.html) |LONGINT|
+[SSLCERTTYPE](https://curl.haxx.se/libcurl/c/CURLOPT_SSLCERTTYPE.html) |TEXT|
+[SSLKEY](https://curl.haxx.se/libcurl/c/CURLOPT_SSLKEY.html) |TEXT|path
+[SSLKEYTYPE](https://curl.haxx.se/libcurl/c/CURLOPT_SSLKEYTYPE.html) |TEXT|
+[DNS_CACHE_TIMEOUT](https://curl.haxx.se/libcurl/c/CURLOPT_DNS_CACHE_TIMEOUT.html) |LONGINT|
+[COOKIESESSION](https://curl.haxx.se/libcurl/c/CURLOPT_COOKIESESSION.html) |LONGINT|
+[CAPATH](https://curl.haxx.se/libcurl/c/CURLOPT_CAPATH.html) |TEXT|path
+[BUFFERSIZE](https://curl.haxx.se/libcurl/c/CURLOPT_BUFFERSIZE.html) |LONGINT|
 [ACCEPT_ENCODING](https://curl.haxx.se/libcurl/c/CURLOPT_ACCEPT_ENCODING.html) |TEXT|
 [UNRESTRICTED_AUTH](https://curl.haxx.se/libcurl/c/CURLOPT_UNRESTRICTED_AUTH.html) |LONGINT|
 [FTP_USE_EPRT](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_USE_EPRT.html) |LONGINT|
@@ -231,6 +244,19 @@ Value|Type|Description
 
 Not implemented
 
+``IOCTLDATA``  
+``IOCTLFUNCTION``  
+``TCP_NODELAY``  
+``SSL_CTX_DATA``  
+``SSL_CTX_FUNCTION``  
+``SHARE``  
+``NOSIGNAL``  
+``DEBUGDATA``  
+``DEBUGFUNCTION``  
+``DNS_USE_GLOBAL_CACHE``  
+``SSLENGINE_DEFAULT``  
+``SSLENGINE``  
+``HEADERFUNCTION``  
 ``SEEKDATA``  
 ``SEEKFUNCTION``  
 ``COPYPOSTFIELDS``  
