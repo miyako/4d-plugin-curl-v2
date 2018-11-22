@@ -27,7 +27,7 @@ Parameter|Type|Description
 ------------|------------|----
 options|TEXT|``JSON`` object
 request|BLOB|
-response|BLOB|
+response|BLOB|out
 callbackMethod|TEXT|
 transferInfo|TEXT|out, ``JSON`` ``curl_easy_getinfo``
 headerInfo|TEXT|out
