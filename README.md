@@ -451,9 +451,6 @@ version|TEXT|``curl_version_info``
 		"telnet",
 		"tftp"
 	],
-	"ares_num": 0,
-	"libssh_version": "libssh2/1.8.0",
-	"iconv_ver_num": 0,
-	"brotli_ver_num": 0
+	"libssh_version": "libssh2/1.8.0"
 }
 ```
