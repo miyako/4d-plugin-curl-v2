@@ -294,6 +294,8 @@ Value|Type|Description
 
 Not supported
 
+``POSTFIELDSIZE_LARGE`` (automatic)  
+``INFILESIZE_LARGE`` (automatic)  
 ``POSTFIELDS``  
 ``VERBOSE``  
 ``NOPROGRESS``  
