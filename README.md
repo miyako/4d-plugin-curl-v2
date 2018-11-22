@@ -290,8 +290,9 @@ Value|Type|Description
 
 ---
 
-Not implemented
+Not supported
 
+``VERBOSE``  
 ``READFUNCTION``  
 ``WRITEFUNCTION``  
 ``ERRORBUFFER``  
