@@ -20,7 +20,7 @@ Generic network client based on libcurl-7.62.0
 ## Syntax
 
 ```
-error:=cURL(options;request;response{;callbackMethod{;transferInfo}})
+error:=cURL(options;request;response{;callbackMethod{;transferInfo{;headerInfo}}})
 ```
 
 Parameter|Type|Description
@@ -28,8 +28,9 @@ Parameter|Type|Description
 options|TEXT|``JSON`` object
 request|BLOB|
 response|BLOB|
-callbackMethod|TEXT|optional
+callbackMethod|TEXT|
 transferInfo|TEXT|out, ``JSON`` ``curl_easy_getinfo``
+headerInfo|TEXT|out
 error|LONGINT|[Error code](https://curl.haxx.se/libcurl/c/libcurl-errors.html)
 
 ---
