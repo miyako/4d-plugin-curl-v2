@@ -421,6 +421,7 @@ version|TEXT|``curl_version_info``
 
 ```json
 {
+{
 	"version": "7.62.0",
 	"version_num": 474624,
 	"host": "Darwin",
@@ -450,6 +451,10 @@ version|TEXT|``curl_version_info``
 		"smtps",
 		"telnet",
 		"tftp"
-	]
+	],
+	"ares_num": 0,
+	"libssh_version": "libssh2/1.8.0",
+	"iconv_ver_num": 0,
+	"brotli_ver_num": 0
 }
 ```
