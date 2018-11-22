@@ -107,6 +107,36 @@ Standard  ``options``
 
 Value|Type|Description
 ------------|------------|----
+[SSLCERT](https://curl.haxx.se/libcurl/c/CURLOPT_SSLCERT.html) |TEXT|path
+[KEYPASSWD](https://curl.haxx.se/libcurl/c/CURLOPT_KEYPASSWD.html) |TEXT|
+[CRLF](https://curl.haxx.se/libcurl/c/CURLOPT_CRLF.html) |LONGINT|
+[COOKIEFILE](https://curl.haxx.se/libcurl/c/CURLOPT_COOKIEFILE.html) |TEXT|path
+[TIMEVALUE](https://curl.haxx.se/libcurl/c/CURLOPT_TIMEVALUE.html) |LONGINT|
+[CUSTOMREQUEST](https://curl.haxx.se/libcurl/c/CURLOPT_CUSTOMREQUEST.html) |TEXT|
+[HEADER](https://curl.haxx.se/libcurl/c/CURLOPT_HEADER.html) |LONGINT|
+[NOBODY](https://curl.haxx.se/libcurl/c/CURLOPT_NOBODY.html) |LONGINT|
+[FAILONERROR](https://curl.haxx.se/libcurl/c/CURLOPT_FAILONERROR.html) |LONGINT|
+[UPLOAD](https://curl.haxx.se/libcurl/c/CURLOPT_UPLOAD.html) |LONGINT|
+[POST](https://curl.haxx.se/libcurl/c/CURLOPT_POST.html) |LONGINT|
+[DIRLISTONLY](https://curl.haxx.se/libcurl/c/CURLOPT_DIRLISTONLY.html) |LONGINT|
+[APPEND](https://curl.haxx.se/libcurl/c/CURLOPT_APPEND.html) |LONGINT|
+[NETRC](https://curl.haxx.se/libcurl/c/CURLOPT_NETRC.html) |LONGINT|
+[FOLLOWLOCATION](https://curl.haxx.se/libcurl/c/CURLOPT_FOLLOWLOCATION.html) |LONGINT|
+[PUT](https://curl.haxx.se/libcurl/c/CURLOPT_PUT.html) |LONGINT|
+[AUTOREFERER](https://curl.haxx.se/libcurl/c/CURLOPT_AUTOREFERER.html) |LONGINT|
+[PROXYPORT](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYPORT.html) |LONGINT|
+[HTTPPROXYTUNNEL](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPPROXYTUNNEL.html) |LONGINT|
+[INTERFACE](https://curl.haxx.se/libcurl/c/CURLOPT_INTERFACE.html) |TEXT|
+[KRBLEVEL](https://curl.haxx.se/libcurl/c/CURLOPT_KRBLEVEL.html) |TEXT|
+[SSL_VERIFYPEER](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYPEER.html) |LONGINT|
+[CAINFO](https://curl.haxx.se/libcurl/c/CURLOPT_CAINFO.html) |TEXT|path
+[MAXREDIRS](https://curl.haxx.se/libcurl/c/CURLOPT_MAXREDIRS.html) |LONGINT|
+[FILETIME](https://curl.haxx.se/libcurl/c/CURLOPT_FILETIME.html) |LONGINT|
+[MAXCONNECTS](https://curl.haxx.se/libcurl/c/CURLOPT_MAXCONNECTS.html) |LONGINT|
+[FRESH_CONNECT](https://curl.haxx.se/libcurl/c/CURLOPT_FRESH_CONNECT.html) |LONGINT|
+[FORBID_REUSE](https://curl.haxx.se/libcurl/c/CURLOPT_FORBID_REUSE.html) |LONGINT|
+[RANDOM_FILE](https://curl.haxx.se/libcurl/c/CURLOPT_RANDOM_FILE.html) |TEXT|
+[EGDSOCKET](https://curl.haxx.se/libcurl/c/CURLOPT_EGDSOCKET.html) |TEXT|
 [CONNECTTIMEOUT](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html) |LONGINT|
 [HTTPGET](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPGET.html) |LONGINT|
 [SSL_VERIFYHOST](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html) |LONGINT|
@@ -244,6 +274,14 @@ Value|Type|Description
 
 Not implemented
 
+``OBSOLETE72``  
+``PROGRESSDATA``  
+``PROGRESSFUNCTION``  
+``TRANSFERTEXT``  
+``OBSOLETE40``  
+``STDERR``  
+``HEADERDATA``  
+``HTTPPOST``  
 ``IOCTLDATA``  
 ``IOCTLFUNCTION``  
 ``TCP_NODELAY``  
