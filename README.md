@@ -418,3 +418,38 @@ versionInfo:=cURL_VersionInfo
 Parameter|Type|Description
 ------------|------------|----
 version|TEXT|``curl_version_info``
+
+```json
+{
+	"version": "7.62.0",
+	"version_num": 474624,
+	"host": "Darwin",
+	"features": 2687645,
+	"ssl_version": "OpenSSL/1.1.0g",
+	"ssl_version_num": 0,
+	"libz_version": "1.2.11",
+	"protocols": [
+		"dict",
+		"file",
+		"ftp",
+		"ftps",
+		"gopher",
+		"http",
+		"https",
+		"imap",
+		"imaps",
+		"ldap",
+		"pop3",
+		"pop3s",
+		"rtsp",
+		"scp",
+		"sftp",
+		"smb",
+		"smbs",
+		"smtp",
+		"smtps",
+		"telnet",
+		"tftp"
+	]
+}
+```
