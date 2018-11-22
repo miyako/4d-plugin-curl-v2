@@ -107,6 +107,28 @@ Standard  ``options``
 
 Value|Type|Description
 ------------|------------|----
+[ACCEPT_ENCODING](https://curl.haxx.se/libcurl/c/CURLOPT_ACCEPT_ENCODING.html) |TEXT|
+[UNRESTRICTED_AUTH](https://curl.haxx.se/libcurl/c/CURLOPT_UNRESTRICTED_AUTH.html) |LONGINT|
+[FTP_USE_EPRT](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_USE_EPRT.html) |LONGINT|
+[HTTPAUTH](https://curl.haxx.se/libcurl/c/CURLOPT_HTTPAUTH.html) |LONGINT|
+[FTP_CREATE_MISSING_DIRS](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_CREATE_MISSING_DIRS.html) |LONGINT|
+[PROXYAUTH](https://curl.haxx.se/libcurl/c/CURLOPT_PROXYAUTH.html) |LONGINT|
+[FTP_RESPONSE_TIMEOUT](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_RESPONSE_TIMEOUT.html) |LONGINT|
+[IPRESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_IPRESOLVE.html) |LONGINT|
+[MAXFILESIZE](https://curl.haxx.se/libcurl/c/CURLOPT_MAXFILESIZE.html) |LONGINT|
+[RESUME_FROM_LARGE](https://curl.haxx.se/libcurl/c/CURLOPT_RESUME_FROM_LARGE.html) |TEXT|text, to support 64-bit integer
+[MAXFILESIZE_LARGE](https://curl.haxx.se/libcurl/c/CURLOPT_MAXFILESIZE_LARGE.html) |TEXT|text, to support 64-bit integer
+[NETRC_FILE](https://curl.haxx.se/libcurl/c/CURLOPT_NETRC_FILE.html) |TEXT|path
+[FTP_ACCOUNT](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_ACCOUNT.html) |TEXT|
+[COOKIELIST](https://curl.haxx.se/libcurl/c/CURLOPT_COOKIELIST.html) |TEXT|
+[IGNORE_CONTENT_LENGTH](https://curl.haxx.se/libcurl/c/CURLOPT_IGNORE_CONTENT_LENGTH.html) |LONGINT|
+[FTP_SKIP_PASV_IP](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_SKIP_PASV_IP.html) |LONGINT|
+[FTP_FILEMETHOD](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_FILEMETHOD.html) |LONGINT|
+[LOCALPORT](https://curl.haxx.se/libcurl/c/CURLOPT_LOCALPORT.html) |LONGINT|
+[LOCALPORTRANGE](https://curl.haxx.se/libcurl/c/CURLOPT_LOCALPORTRANGE.html) |LONGINT|
+[CONNECT_ONLY](https://curl.haxx.se/libcurl/c/CURLOPT_CONNECT_ONLY.html) |LONGINT|
+[MAX_SEND_SPEED_LARGE](https://curl.haxx.se/libcurl/c/CURLOPT_MAX_SEND_SPEED_LARGE.html) |TEXT|text, to support 64-bit integer
+[MAX_RECV_SPEED_LARGE](https://curl.haxx.se/libcurl/c/CURLOPT_MAX_RECV_SPEED_LARGE.html) |TEXT|text, to support 64-bit integer
 [FTP_ALTERNATIVE_TO_USER](https://curl.haxx.se/libcurl/c/CURLOPT_FTP_ALTERNATIVE_TO_USER.html) |TEXT|
 [SSL_SESSIONID_CACHE](https://curl.haxx.se/libcurl/c/CURLOPT_SSL_SESSIONID_CACHE.html) |LONGINT|
 [SSH_AUTH_TYPES](https://curl.haxx.se/libcurl/c/CURLOPT_SSH_AUTH_TYPES.html) |LONGINT|
