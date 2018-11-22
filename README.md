@@ -1,5 +1,5 @@
 # 4d-plugin-curl-v2
-Generic network client based on libcurl
+Generic network client based on libcurl-7.62.0
 
 ### Platform
 
