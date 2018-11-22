@@ -421,7 +421,6 @@ version|TEXT|``curl_version_info``
 
 ```json
 {
-{
 	"version": "7.62.0",
 	"version_num": 474624,
 	"host": "Darwin",
