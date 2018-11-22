@@ -20,7 +20,7 @@ Generic network client based on libcurl
 ## Syntax
 
 ```
-error:=cURL(options;request;response{;callbackMethod{;curlInfo}})
+error:=cURL(options;request;response{;callbackMethod{;transferInfo}})
 ```
 
 Parameter|Type|Description
@@ -29,7 +29,7 @@ options|TEXT|``JSON`` object
 request|BLOB|
 response|BLOB|
 callbackMethod|TEXT|optional
-curlInfo|TEXT|optional
+transferInfo|TEXT|out, ``JSON`` ``curl_easy_getinfo``
 error|LONGINT|[Error code](https://curl.haxx.se/libcurl/c/libcurl-errors.html)
 
 ---
@@ -37,13 +37,13 @@ error|LONGINT|[Error code](https://curl.haxx.se/libcurl/c/libcurl-errors.html)
 Signature of ``callbackMethod``
 
 ```
-abort:=method(curlInfo;userInfo)
+abort:=method(transferInfo;userInfo)
 ```
 
 Parameter|Type|Description
 ------------|------------|----
-curlInfo|TEXT|``JSON`` (``curl_easy_getinfo``)
-userInfo|TEXT|the text passed as the ``PRIVATE`` property of ``option``
+transferInfo|TEXT|out, ``JSON`` ``curl_easy_getinfo``
+userInfo|TEXT|out, the text passed as the ``PRIVATE`` property of ``option``
 abort|BOOLEAN|
 
 [``CURLcode``](https://curl.haxx.se/libcurl/c/libcurl-errors.html) is returned in ``error``. when ``True`` is returned from the callback method, ``CURLE_ABORTED_BY_CALLBACK (42)`` is returned. Same if the process has been aborted via the runtime explorer. aborting the debugger will not kill the process immediately.
