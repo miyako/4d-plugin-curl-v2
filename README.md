@@ -464,3 +464,11 @@ Parameter|Type|Description
 dateString|TEXT|
 seconds|LONGINT|[``curl_getdate``](https://curl.haxx.se/libcurl/c/curl_getdate.html)
 secondsString|TEXT|out
+
+```
+$seconds_32:=cURL_GetDate ("1994 Nov 6 08:49:37";$seconds_64)  //784111777, "784111777"
+$seconds_32:=cURL_GetDate ("1970 Nov 6 08:49:37";$seconds_64)  //26729377, "26729377"
+$seconds_32:=cURL_GetDate ("2038 Nov 6 08:49:37";$seconds_64)  //-1, "2172646177"
+$seconds_32:=cURL_GetDate ("1583 Nov 6 08:49:37";$seconds_64)  //-1, "-12185824223"
+$seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
+```
