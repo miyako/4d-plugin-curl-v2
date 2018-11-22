@@ -93,6 +93,8 @@ ftpEntryPath
 rtspSessionId
 ```
 
+---
+
 Special ``options``
 
 Value|Type|Description
