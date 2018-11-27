@@ -477,3 +477,5 @@ $seconds_32:=cURL_GetDate ("2038 Nov 6 08:49:37";$seconds_64)  //-1, "2172646177
 $seconds_32:=cURL_GetDate ("1583 Nov 6 08:49:37";$seconds_64)  //-1, "-12185824223"
 $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 ```
+
+**Note**: dates after 2038 or before 1970 seems to return different values on windows.
