@@ -231,15 +231,15 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
                 }
                 
             {
-                if(1)
-                {
-                    std::lock_guard<std::mutex> lock(mutexMcurl);
-                    
-                    curl_get_info(curl, info);
-                }
                 
                 if(Param4.getUTF16Length())
                 {
+                    if(1)
+                    {
+                        std::lock_guard<std::mutex> lock(mutexMcurl);
+                        
+                        curl_get_info(curl, info);
+                    }
                     if(method_id)
                     {
                         PA_SetUnistring((&(params[0].uValue.fString)),
@@ -472,10 +472,11 @@ void cURL_GetDate(sLONG_PTR *pResult, PackagePtr pParams)
     if(date != -1)
     {
         std::vector<uint8_t> buf(20);
+        memset((char *)&buf[0], 0, buf.size());
 #if VERSIONMAC
         sprintf((char *)&buf[0], "%ld", date);
 #else
-        sprintf_s((char *)&buf[0], 3, "%ld", date);
+        sprintf_s((char *)&buf[0], 20, "%ld", date);
 #endif
         Param2.setUTF8String((const uint8_t *)&buf[0], strlen((const char *)&buf[0]));
     }
