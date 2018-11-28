@@ -15,7 +15,7 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-[2.1-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.1-carbon) windows support
+[2.2-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2-carbon) windows support
 
 ## Syntax
 
