@@ -479,3 +479,7 @@ $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 ```
 
 **Note**: dates after 2038 or before 1970 seems to return different values on windows.
+
+---
+
+<img width="1005" alt="2018-11-28 20 25 17" src="https://user-images.githubusercontent.com/1725068/49149322-21ce4e00-f34d-11e8-8c12-c61cf4eaf22f.png">
