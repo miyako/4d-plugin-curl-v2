@@ -483,3 +483,5 @@ $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 ---
 
 <img width="1005" alt="2018-11-28 20 25 17" src="https://user-images.githubusercontent.com/1725068/49149322-21ce4e00-f34d-11e8-8c12-c61cf4eaf22f.png">
+
+<img width="988" alt="2018-11-28 20 36 16" src="https://user-images.githubusercontent.com/1725068/49149400-4de9cf00-f34d-11e8-9990-9ff093b78d99.png">
