@@ -19,6 +19,8 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
+
 [2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
 
 ## Syntax
