@@ -121,6 +121,22 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 
 #pragma mark -
 
+CURLcode curl_perform(CURL *curl, C_TEXT& Param4, C_TEXT& userInfo)
+{
+    /* callback argument or return value if method name is empty */
+    CUTF16String info;
+    CURLcode result = CURLE_OK;
+    
+    std::lock_guard<std::mutex> lock(mutexMcurl);
+    
+    result = curl_easy_perform(curl);
+    
+    curl_get_info(curl, info);
+    Param4.setUTF16String(&info);
+    
+    return result;
+}
+
 CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo)
 {
     /* callback argument or return value if method name is empty */
@@ -569,7 +585,7 @@ void cURL_VersionInfo(sLONG_PTR *pResult, PackagePtr pParams)
 
 #pragma mark main
 
-void curl_set_options(CURL *curl,
+BOOL curl_set_options(CURL *curl,
                       C_TEXT& Param1,
                       CPathString& request_path,
                       CPathString& response_path,
@@ -586,6 +602,7 @@ void curl_set_options(CURL *curl,
                       struct curl_slist *curl_slist_quote,
                       struct curl_slist *curl_slist_telnet_options)
 {
+    BOOL isAtomic = FALSE;
     CUTF8String Param1_u8;
     Param1.copyUTF8String(&Param1_u8);
     
@@ -711,6 +728,9 @@ void curl_set_options(CURL *curl,
                             json_free(value);
                         }
                     }
+                        break;
+                    case CURLOPT_ATOMIC:
+                        isAtomic = json_as_int(*i);
                         break;
                         
                     /* string */
@@ -957,7 +977,7 @@ void curl_set_options(CURL *curl,
         }
         json_delete(option);
     }
-
+    return isAtomic;
 }
 
 void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
@@ -996,22 +1016,22 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     CPathString request_path;
     CPathString response_path;
     
-    curl_set_options(curl,
-                     Param1 /* options */,
-                     request_path,
-                     response_path,
-                     userInfo,
-                     curl_slist_connect_to,
-                     curl_slist_proxy_header,
-                     curl_slist_http_header,
-                     curl_slist_http_200_aliases,
-                     curl_slist_resolve,
-                     curl_slist_mail_rcpt,
-                     curl_slist_mail_from,
-                     curl_slist_prequote,
-                     curl_slist_postquote,
-                     curl_slist_quote,
-                     curl_slist_telnet_options);
+    BOOL isAtomic = curl_set_options(curl,
+                                     Param1 /* options */,
+                                     request_path,
+                                     response_path,
+                                     userInfo,
+                                     curl_slist_connect_to,
+                                     curl_slist_proxy_header,
+                                     curl_slist_http_header,
+                                     curl_slist_http_200_aliases,
+                                     curl_slist_resolve,
+                                     curl_slist_mail_rcpt,
+                                     curl_slist_mail_from,
+                                     curl_slist_prequote,
+                                     curl_slist_postquote,
+                                     curl_slist_quote,
+                                     curl_slist_telnet_options);
     
     http_ctx request_ctx;
     request_ctx.pos = 0L;
@@ -1065,8 +1085,14 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     
     curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
     
-    returnValue.setIntValue(curl_perform(mcurl, curl, Param4 /* callbackMethod */, userInfo));
-    
+    if(isAtomic)
+    {
+        returnValue.setIntValue(curl_perform(curl, Param4 /* callbackMethod */, userInfo));
+    }else
+    {
+        returnValue.setIntValue(curl_perform(mcurl, curl, Param4 /* callbackMethod */, userInfo));
+    }
+   
     CUTF16String info;
     curl_get_info(curl, info);
     Param5.setUTF16String(&info); /* transferInfo */
@@ -1352,6 +1378,10 @@ CURLoption json_get_curl_option_name(JSONNODE *n)
             if (s.compare(L"PRIVATE") == 0)
             {
                 v = (CURLoption)CURLOPT_PRIVATE;goto json_get_curl_option_exit;
+            }
+            if (s.compare(L"ATOMIC") == 0)
+            {
+                v = (CURLoption)CURLOPT_ATOMIC;goto json_get_curl_option_exit;
             }
             
             /* string */
