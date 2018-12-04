@@ -37,6 +37,7 @@ void json_set_b_for_key(JSONNODE *n, json_char *key, json_bool_t value);
 void json_set_i_for_key(JSONNODE *n, json_char *key, json_int_t value);
 
 #define CURLOPT_AUTOPROXY 8
+#define CURLOPT_ATOMIC 73
 
 #if VERSIONMAC
 #define CPathString CUTF8String
