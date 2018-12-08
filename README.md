@@ -115,6 +115,7 @@ Value|Type|Description
 [WRITEDATA](https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html) |TEXT|use file path instead of ``response``
 AUTOPROXY |LONGINT|``1`` to use ``libproxy``
 ATOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
+DEBUG |TEXT|folder path to create log paths
 
 ---
 
