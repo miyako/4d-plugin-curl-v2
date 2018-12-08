@@ -19,6 +19,8 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[2.5](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.5) 
+
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
 
 [2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
