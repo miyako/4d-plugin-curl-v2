@@ -19,6 +19,8 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
+
 [2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
 
 ## Syntax
@@ -108,7 +110,7 @@ Value|Type|Description
 [READDATA](https://curl.haxx.se/libcurl/c/CURLOPT_READDATA.html) |TEXT|use file path instead of ``request``
 [WRITEDATA](https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html) |TEXT|use file path instead of ``response``
 AUTOPROXY |LONGINT|``1`` to use ``libproxy``
-TOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
+ATOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
 
 ---
 
@@ -483,6 +485,6 @@ $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 
 ---
 
-<img width="1005" alt="2018-11-28 20 25 17" src="https://user-images.githubusercontent.com/1725068/49149322-21ce4e00-f34d-11e8-8c12-c61cf4eaf22f.png">
+<img width="945" alt="2018-12-08 11 35 34" src="https://user-images.githubusercontent.com/1725068/49680913-7b691200-fadd-11e8-87cd-23da63e9bf41.png">
 
 <img width="988" alt="2018-11-28 20 36 16" src="https://user-images.githubusercontent.com/1725068/49149400-4de9cf00-f34d-11e8-9990-9ff093b78d99.png">
