@@ -378,6 +378,58 @@ size_t curl_header_function(char *buffer,
     return len;
 }
 
+size_t curl_debug_function(CURL *curl,
+                           curl_infotype type,
+                           char *data,
+                           size_t size,
+                           http_ctx *ctx)
+{
+
+#if VERSIONMAC
+    std::string path;
+    path = (const char *)ctx->path;
+#else
+    std::wstring path;
+    path = (const wchar_t *)ctx->path;
+#endif
+    
+    switch (type)
+    {
+        case CURLINFO_TEXT:
+            path += LOG_CURLINFO_TEXT;
+            break;
+        case CURLINFO_HEADER_IN:
+            path += LOG_CURLINFO_HEADER_IN;
+            break;
+        case CURLINFO_HEADER_OUT:
+            path += LOG_CURLINFO_HEADER_OUT;
+            break;
+        case CURLINFO_DATA_IN:
+            path += LOG_CURLINFO_DATA_IN;
+            break;
+        case CURLINFO_DATA_OUT:
+            path += LOG_CURLINFO_DATA_OUT;
+            break;
+        case CURLINFO_SSL_DATA_IN:
+            path += LOG_CURLINFO_SSL_DATA_OUT;
+            break;
+        case CURLINFO_SSL_DATA_OUT:
+            path += LOG_CURLINFO_SSL_DATA_IN;
+            break;
+    }
+
+    create_parent_folder((path_t *)path.c_str());
+    FILE *f = CPathOpen ((path_t *)path.c_str(), ctx->size ? CPathAppend : CPathCreate);
+    
+    if(f)
+    {
+        ctx->size += size;
+        fwrite(data, size, sizeof(char), f);
+        fclose(f);
+    }
+
+    return 0;
+}
 size_t curl_write_function(void *buffer,
                            size_t size,
                            size_t nmemb,
@@ -584,6 +636,67 @@ void cURL_VersionInfo(sLONG_PTR *pResult, PackagePtr pParams)
 }
 
 #pragma mark main
+
+BOOL curl_set_debug_option(CURL *curl,
+                           C_TEXT& Param1,
+                           CPathString& debug_folder_path)
+{
+    BOOL isDebugEnabled = FALSE;
+    CUTF8String Param1_u8;
+    Param1.copyUTF8String(&Param1_u8);
+    
+    std::wstring Param1_option;
+    json_wconv((const char *)Param1_u8.c_str(), Param1_option);
+    
+    std::lock_guard<std::mutex> lock(mutexJson);
+    
+    JSONNODE *option = json_parse(Param1_option.c_str());
+    
+    if(option)
+    {
+        if (json_type(option) == JSON_NODE)
+        {
+            CURLoption curl_option;
+            /* get the url first */
+            CUTF8String path;
+            JSONNODE_ITERATOR i = json_begin(option);
+            
+            while (i != json_end(option))
+            {
+                curl_option = json_get_curl_option_name(*i);
+                if(curl_option == CURLOPT_VERBOSE)
+                {
+                    json_char *value = json_as_string(*i);
+                    
+                    if(value)
+                    {
+#if VERSIONMAC
+                        CUTF16String path;
+                        json_wconv(value, &path);
+                        C_TEXT t;
+                        t.setUTF16String(&path);
+                        CUTF8String _path;
+                        t.copyPath(&_path);
+                        debug_folder_path = (const uint8_t *)_path.c_str();
+                         if(debug_folder_path.at(debug_folder_path.size() - 1) != '/') debug_folder_path += '/';
+#else
+                        debug_folder_path = (const PA_Unichar *)value;
+                        if(debug_folder_path.at(debug_folder_path.size() - 1) != L'\\') debug_folder_path += L'\\';
+#endif
+                        isDebugEnabled = TRUE;
+
+                        json_free(value);
+                    }
+                    break;
+                }
+                ++i;
+            }
+            
+        }
+        json_delete(option);
+    }
+    return isDebugEnabled;
+}
 
 BOOL curl_set_options(CURL *curl,
                       C_TEXT& Param1,
@@ -1048,6 +1161,34 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     header_ctx.data = &Param7;/* headerInfo */
     header_ctx.size = 0L;
     
+#if WITH_DEBUG_FUNCTION
+    http_ctx debug_ctx;
+
+    debug_ctx.pos = 0L;
+    debug_ctx.data = &Param2; /* debug */
+    debug_ctx.size = 0L;
+    
+    CPathString debug_folder_path;
+    if(curl_set_debug_option(curl,
+                             Param1 /* options */,
+                             debug_folder_path))
+    {
+        debug_ctx.use_path = true;
+        debug_ctx.pos = 0L;
+        debug_ctx.data = NULL;
+        debug_ctx.size = 0L;
+        
+#if VERSIONMAC
+        debug_ctx.path = (const char *)debug_folder_path.c_str();
+#else
+        debug_ctx.path = (const wchar_t *)debug_folder_path.c_str();
+#endif
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
+        curl_easy_setopt(curl, CURLOPT_DEBUGDATA, &debug_ctx);
+        curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, curl_debug_function);
+    }
+#endif
+    
 #if VERSIONMAC
     request_ctx.path = (const char *)request_path.c_str();
     response_ctx.path = (const char *)response_path.c_str();
@@ -1382,6 +1523,10 @@ CURLoption json_get_curl_option_name(JSONNODE *n)
             if (s.compare(L"ATOMIC") == 0)
             {
                 v = (CURLoption)CURLOPT_ATOMIC;goto json_get_curl_option_exit;
+            }
+            if (s.compare(L"DEBUG") == 0)
+            {
+                v = (CURLoption)CURLOPT_VERBOSE;goto json_get_curl_option_exit;
             }
             
             /* string */
