@@ -382,7 +382,7 @@ size_t curl_debug_function(CURL *curl,
                            curl_infotype type,
                            char *data,
                            size_t size,
-                           http_ctx *ctx)
+                           http_debug_ctx *ctx)
 {
 
 #if VERSIONMAC
@@ -393,37 +393,46 @@ size_t curl_debug_function(CURL *curl,
     path = (const wchar_t *)ctx->path;
 #endif
     
+    curl_off_t  *f_size = NULL;
+    
     switch (type)
     {
         case CURLINFO_TEXT:
             path += LOG_CURLINFO_TEXT;
+            f_size = &ctx->size_CURLINFO_TEXT;
             break;
         case CURLINFO_HEADER_IN:
             path += LOG_CURLINFO_HEADER_IN;
+            f_size = &ctx->size_CURLINFO_HEADER_IN;
             break;
         case CURLINFO_HEADER_OUT:
             path += LOG_CURLINFO_HEADER_OUT;
+            f_size = &ctx->size_CURLINFO_HEADER_OUT;
             break;
         case CURLINFO_DATA_IN:
             path += LOG_CURLINFO_DATA_IN;
+            f_size = &ctx->size_CURLINFO_DATA_IN;
             break;
         case CURLINFO_DATA_OUT:
             path += LOG_CURLINFO_DATA_OUT;
-            break;
-        case CURLINFO_SSL_DATA_IN:
-            path += LOG_CURLINFO_SSL_DATA_OUT;
+            f_size = &ctx->size_CURLINFO_DATA_OUT;
             break;
         case CURLINFO_SSL_DATA_OUT:
             path += LOG_CURLINFO_SSL_DATA_IN;
+            f_size = &ctx->size_CURLINFO_SSL_DATA_IN;
+            break;
+        case CURLINFO_SSL_DATA_IN:
+            path += LOG_CURLINFO_SSL_DATA_OUT;
+            f_size = &ctx->size_CURLINFO_SSL_DATA_OUT;
             break;
     }
 
     create_parent_folder((path_t *)path.c_str());
-    FILE *f = CPathOpen ((path_t *)path.c_str(), ctx->size ? CPathAppend : CPathCreate);
+    FILE *f = CPathOpen ((path_t *)path.c_str(), *f_size ? CPathAppend : CPathCreate);
     
     if(f)
     {
-        ctx->size += size;
+        *f_size += size;
         fwrite(data, size, sizeof(char), f);
         fclose(f);
     }
@@ -1162,27 +1171,28 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     header_ctx.size = 0L;
     
 #if WITH_DEBUG_FUNCTION
-    http_ctx debug_ctx;
-
-    debug_ctx.pos = 0L;
-    debug_ctx.data = &Param2; /* debug */
-    debug_ctx.size = 0L;
+    http_debug_ctx debug_ctx;
+    
+    debug_ctx.size_CURLINFO_TEXT = 0L;
+    debug_ctx.size_CURLINFO_HEADER_IN = 0L;
+    debug_ctx.size_CURLINFO_HEADER_OUT = 0L;
+    debug_ctx.size_CURLINFO_DATA_IN = 0L;
+    debug_ctx.size_CURLINFO_DATA_OUT = 0L;
+    debug_ctx.size_CURLINFO_SSL_DATA_IN = 0L;
+    debug_ctx.size_CURLINFO_SSL_DATA_OUT = 0L;
     
     CPathString debug_folder_path;
+    
     if(curl_set_debug_option(curl,
                              Param1 /* options */,
                              debug_folder_path))
     {
-        debug_ctx.use_path = true;
-        debug_ctx.pos = 0L;
-        debug_ctx.data = NULL;
-        debug_ctx.size = 0L;
-        
 #if VERSIONMAC
         debug_ctx.path = (const char *)debug_folder_path.c_str();
 #else
         debug_ctx.path = (const wchar_t *)debug_folder_path.c_str();
 #endif
+        
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
         curl_easy_setopt(curl, CURLOPT_DEBUGDATA, &debug_ctx);
         curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, curl_debug_function);
