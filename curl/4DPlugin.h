@@ -73,23 +73,24 @@ void create_parent_folder(path_t *absolute_path);
 
 #define WITH_DEBUG_FUNCTION 1
 
-
-#if VERSIONMAC
-#define LOG_CURLINFO_TEXT           "CURLINFO_TEXT.log"
-#define LOG_CURLINFO_HEADER_IN      "CURLINFO_HEADER_IN.log"
-#define LOG_CURLINFO_HEADER_OUT     "CURLINFO_HEADER_OUT.log"
-#define LOG_CURLINFO_DATA_IN        "CURLINFO_DATA_IN.log"
-#define LOG_CURLINFO_DATA_OUT       "CURLINFO_DATA_OUT.log"
-#define LOG_CURLINFO_SSL_DATA_OUT   "CURLINFO_SSL_DATA_OUT.log"
-#define LOG_CURLINFO_SSL_DATA_IN    "CURLINFO_SSL_DATA_IN.log"
-#else
-#define LOG_CURLINFO_TEXT           L"CURLINFO_TEXT.log"
-#define LOG_CURLINFO_HEADER_IN      L"CURLINFO_HEADER_IN.log"
-#define LOG_CURLINFO_HEADER_OUT     L"CURLINFO_HEADER_OUT.log"
-#define LOG_CURLINFO_DATA_IN        L"CURLINFO_DATA_IN.log"
-#define LOG_CURLINFO_DATA_OUT       L"CURLINFO_DATA_OUT.log"
-#define LOG_CURLINFO_SSL_DATA_OUT   L"CURLINFO_SSL_DATA_OUT.log"
-#define LOG_CURLINFO_SSL_DATA_IN    L"CURLINFO_SSL_DATA_IN.log"
+#if WITH_DEBUG_FUNCTION
+    #if VERSIONMAC
+    #define LOG_CURLINFO_TEXT           "CURLINFO_TEXT.log"
+    #define LOG_CURLINFO_HEADER_IN      "CURLINFO_HEADER_IN.log"
+    #define LOG_CURLINFO_HEADER_OUT     "CURLINFO_HEADER_OUT.log"
+    #define LOG_CURLINFO_DATA_IN        "CURLINFO_DATA_IN.log"
+    #define LOG_CURLINFO_DATA_OUT       "CURLINFO_DATA_OUT.log"
+    #define LOG_CURLINFO_SSL_DATA_OUT   "CURLINFO_SSL_DATA_OUT.log"
+    #define LOG_CURLINFO_SSL_DATA_IN    "CURLINFO_SSL_DATA_IN.log"
+    #else
+    #define LOG_CURLINFO_TEXT           L"CURLINFO_TEXT.log"
+    #define LOG_CURLINFO_HEADER_IN      L"CURLINFO_HEADER_IN.log"
+    #define LOG_CURLINFO_HEADER_OUT     L"CURLINFO_HEADER_OUT.log"
+    #define LOG_CURLINFO_DATA_IN        L"CURLINFO_DATA_IN.log"
+    #define LOG_CURLINFO_DATA_OUT       L"CURLINFO_DATA_OUT.log"
+    #define LOG_CURLINFO_SSL_DATA_OUT   L"CURLINFO_SSL_DATA_OUT.log"
+    #define LOG_CURLINFO_SSL_DATA_IN    L"CURLINFO_SSL_DATA_IN.log"
+    #endif
 #endif
 
 typedef struct
@@ -98,12 +99,28 @@ typedef struct
     C_BLOB *data;
     
     const path_t *path;
-    size_t pos;
-    curl_off_t size;
+    size_t pos;/* for read */
+    curl_off_t size;/* for write */
     
     BOOL use_path;
     
 }http_ctx;
+
+#if WITH_DEBUG_FUNCTION
+typedef struct
+{
+    const path_t *path;
+    
+    curl_off_t size_CURLINFO_TEXT;
+    curl_off_t size_CURLINFO_HEADER_IN;
+    curl_off_t size_CURLINFO_HEADER_OUT;
+    curl_off_t size_CURLINFO_DATA_IN;
+    curl_off_t size_CURLINFO_DATA_OUT;
+    curl_off_t size_CURLINFO_SSL_DATA_IN;
+    curl_off_t size_CURLINFO_SSL_DATA_OUT;
+
+}http_debug_ctx;
+#endif
 
 CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param3, C_TEXT& userInfo);
 
