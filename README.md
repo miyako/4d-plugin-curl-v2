@@ -19,6 +19,8 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[2.5](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.5) 
+
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
 
 [2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
@@ -113,6 +115,7 @@ Value|Type|Description
 [WRITEDATA](https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html) |TEXT|use file path instead of ``response``
 AUTOPROXY |LONGINT|``1`` to use ``libproxy``
 ATOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
+DEBUG |TEXT|folder path to create log paths
 
 ---
 
@@ -484,6 +487,27 @@ $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 ```
 
 **Note**: dates after 2038 or before 1970 seems to return different values on windows.
+
+``DEBUG`` example
+
+```
+C_OBJECT($options)
+
+OB SET($options;"URL";"https://github.com/miyako/4d-plugin-curl-v2/blob/master/curl/4DPlugin.cpp")
+
+$options.DEBUG:=Get 4D folder(Logs folder)
+$options.SSL_VERIFYPEER:=0
+$options.SSL_VERIFYHOST:=0
+
+$callback:=""
+
+C_TEXT($transferInfo;$headerInfo)
+C_BLOB($request;$response)
+
+$error:=cURL (JSON Stringify($options);$requests;$response;$callback;$transferInfo;$headerInfo)
+
+SHOW ON DISK(Get 4D folder(Logs folder);*)
+```
 
 ---
 
