@@ -19,7 +19,7 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
-[2.5](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.5) 
+[2.6](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.6) added ``DEBUG`` option 
 
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
 
@@ -115,7 +115,7 @@ Value|Type|Description
 [WRITEDATA](https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html) |TEXT|use file path instead of ``response``
 AUTOPROXY |LONGINT|``1`` to use ``libproxy``
 ATOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
-DEBUG |TEXT|folder path to create log paths
+[DEBUG](https://curl.haxx.se/libcurl/c/CURLOPT_VERBOSE.html) |TEXT|folder path to create log paths
 
 ---
 
