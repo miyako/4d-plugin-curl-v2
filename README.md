@@ -488,6 +488,27 @@ $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 
 **Note**: dates after 2038 or before 1970 seems to return different values on windows.
 
+``DEBUG`` example
+
+```
+C_OBJECT($options)
+
+OB SET($options;"URL";"https://github.com/miyako/4d-plugin-curl-v2/blob/master/curl/4DPlugin.cpp")
+
+$options.DEBUG:=Get 4D folder(Logs folder)
+$options.SSL_VERIFYPEER:=0
+$options.SSL_VERIFYHOST:=0
+
+$callback:=""
+
+C_TEXT($transferInfo;$headerInfo)
+C_BLOB($request;$response)
+
+$error:=cURL (JSON Stringify($options);$requests;$response;$callback;$transferInfo;$headerInfo)
+
+SHOW ON DISK(Get 4D folder(Logs folder);*)
+```
+
 ---
 
 <img width="945" alt="2018-12-08 11 35 34" src="https://user-images.githubusercontent.com/1725068/49680913-7b691200-fadd-11e8-87cd-23da63e9bf41.png">
