@@ -15,7 +15,7 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-[2.5-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.5-carbon) 
+[2.6-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.6-carbon) added ``DEBUG`` option 
 
 [2.4-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4-carbon) openssl ``1.1`` on windows
 
@@ -111,7 +111,7 @@ Value|Type|Description
 [WRITEDATA](https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html) |TEXT|use file path instead of ``response``
 AUTOPROXY |LONGINT|``1`` to use ``libproxy``
 ATOMIC |LONGINT|``1`` to use simple (as opposed to multiple) API
-DEBUG |TEXT|folder path to create log paths
+[DEBUG](https://curl.haxx.se/libcurl/c/CURLOPT_VERBOSE.html) |TEXT|folder path to create log paths
 
 ---
 
