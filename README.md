@@ -19,7 +19,7 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
-[2.6](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.6) added ``DEBUG`` option 
+[2.7](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.7) added ``DEBUG`` option 
 
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
 
