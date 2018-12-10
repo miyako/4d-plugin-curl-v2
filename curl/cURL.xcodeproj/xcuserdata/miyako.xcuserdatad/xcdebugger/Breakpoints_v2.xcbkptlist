@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "381"
             endingLineNumber = "381"
-            landmarkName = "curl_debug_function(CURL *curl, curl_infotype type, char *data, size_t size, http_ctx *ctx)"
+            landmarkName = "curl_debug_function(CURL *curl, curl_infotype type, char *data, size_t size, http_debug_ctx *ctx)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

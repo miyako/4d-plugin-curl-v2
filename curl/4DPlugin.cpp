@@ -1207,8 +1207,8 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     response_ctx.path = (const wchar_t *)response_path.c_str();
 #endif
     
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE_LARGE, Param2.getBytesLength());
-    curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, Param2.getBytesLength());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE_LARGE, (curl_off_t)Param2.getBytesLength());
+    curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, (curl_off_t)Param2.getBytesLength());
     FILE *f = CPathOpen (request_ctx.path, CPathRead);
     if(f)
     {
