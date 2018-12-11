@@ -15,7 +15,7 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-[2.7-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.7-carbon) added ``DEBUG`` option 
+[2.8-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8-carbon) added ``DEBUG`` option 
 
 [2.4-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4-carbon) openssl ``1.1`` on windows
 
