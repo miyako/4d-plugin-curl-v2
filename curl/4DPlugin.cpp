@@ -1472,6 +1472,22 @@ void json_set_i_for_key(JSONNODE *n, json_char *key, json_int_t value)
     }
 }
 
+void json_set_f_for_key(JSONNODE *n, json_char *key, json_number value)
+{
+    if (n)
+    {
+        JSONNODE *e = json_get(n, key);
+        if (e)
+        {
+            json_set_f(e, value);//over-write existing value
+        }
+        else
+        {
+            json_push_back(n, json_new_f(key, value));
+        }
+    }
+}
+
 void json_stringify(JSONNODE *json, CUTF16String &t, BOOL pretty)
 {
     json_char *json_string = pretty ? json_write_formatted(json) : json_write(json);
@@ -2628,7 +2644,7 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         json_set_i_for_key(info, L"conditionUnmet", conditionUnmet);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_UPLOAD, &contentLengthUpload))
-        json_set_i_for_key(info, L"contentLengthUpload", contentLengthUpload);
+        json_set_f_for_key(info, L"contentLengthUpload", (json_number)contentLengthUpload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_RTSP_CLIENT_CSEQ, &rtspClientCseq))
         json_set_i_for_key(info, L"rtspClientCseq", rtspClientCseq);
@@ -2649,7 +2665,7 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         json_set_i_for_key(info, L"localPort", localPort);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &contentLengthDownload))
-        json_set_i_for_key(info, L"contentLengthDownload", contentLengthDownload);
+        json_set_f_for_key(info, L"contentLengthDownload", (json_number)contentLengthDownload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_HTTP_CONNECTCODE, &connectCode))
         json_set_i_for_key(info, L"connectCode", connectCode);
@@ -2658,7 +2674,7 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         json_set_i_for_key(info, L"fileTime", fileTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &totalTime))
-        json_set_i_for_key(info, L"totalTime", totalTime);
+        json_set_f_for_key(info, L"totalTime", (json_number)totalTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_REQUEST_SIZE , &requestSize))
         json_set_i_for_key(info, L"requestSize", requestSize);
@@ -2667,16 +2683,16 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         json_set_i_for_key(info, L"headerSize", headerSize);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_UPLOAD, &speedUpload))
-        json_set_i_for_key(info, L"speedUpload", speedUpload);
+        json_set_f_for_key(info, L"speedUpload", (json_number)speedUpload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD, &speedDownload))
-        json_set_i_for_key(info, L"speedDownload", speedDownload);
+        json_set_f_for_key(info, L"speedDownload", (json_number)speedDownload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD, &sizeDownload))
-        json_set_i_for_key(info, L"sizeDownload", sizeDownload);
+        json_set_f_for_key(info, L"sizeDownload", (json_number)sizeDownload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD, &sizeUpload))
-        json_set_i_for_key(info, L"sizeUpload", sizeUpload);
+        json_set_f_for_key(info, L"sizeUpload", (json_number)sizeUpload);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_HTTPAUTH_AVAIL, &httpAuthAvail))
         json_set_i_for_key(info, L"httpAuthAvail", httpAuthAvail);
@@ -2694,22 +2710,22 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         json_set_i_for_key(info, L"responseCode", responseCode);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_NAMELOOKUP_TIME, &nameLookupTime))
-        json_set_i_for_key(info, L"nameLookupTime", nameLookupTime);
+        json_set_f_for_key(info, L"nameLookupTime", (json_number)nameLookupTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONNECT_TIME, &connectTime))
-        json_set_i_for_key(info, L"connectTime", connectTime);
+        json_set_f_for_key(info, L"connectTime", (json_number)connectTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_APPCONNECT_TIME, &appConnectTime))
-        json_set_i_for_key(info, L"appConnectTime", appConnectTime);
+        json_set_f_for_key(info, L"appConnectTime", (json_number)appConnectTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_PRETRANSFER_TIME, &preTransferTime))
-        json_set_i_for_key(info, L"preTransferTime", preTransferTime);
+        json_set_f_for_key(info, L"preTransferTime", (json_number)preTransferTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_STARTTRANSFER_TIME, &startTransferTime))
-        json_set_i_for_key(info, L"startTransferTime", startTransferTime);
+        json_set_f_for_key(info, L"startTransferTime", (json_number)startTransferTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_REDIRECT_TIME, &redirectTime))
-        json_set_i_for_key(info, L"redirectTime", redirectTime);
+        json_set_f_for_key(info, L"redirectTime", (json_number)redirectTime);
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SSL_VERIFYRESULT , &sslVerifyResult))
         json_set_i_for_key(info, L"sslVerifyResult", sslVerifyResult);
