@@ -19,6 +19,16 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+* Some major changes in 2.9
+
+Use ``jsoncpp`` instead of ``libjson``
+
+Less callbacks (``1/256``) 
+
+``DELAY PRCESS 0`` when no callbacks are defined
+
+Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
+
 [2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
 
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
