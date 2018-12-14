@@ -14,7 +14,38 @@
 #include <mutex>
 
 #include "curl.h"
+
+#define YIELD_NO_CALLBACK 1
+#define LESS_CALLBACK 1
+
+#define USE_JSONCPP 1
+#define USE_PA_EXECUTE_METHOD_BY_ID 1
+
+#if USE_JSONCPP
+#include "json/json.h"
+void convertFromString(std::string &fromString, CUTF16String &toString);
+CURLoption json_get_curl_option_name(Json::Value::const_iterator n);
+long json_get_curl_option_value(Json::Value::const_iterator n);
+void json_get_curl_option_v(CURL *curl, CURLoption option, Json::Value::const_iterator n, struct curl_slist *list);
+#else
 #include "libjson.h"
+void json_push_back_s(JSONNODE *n, const char *value);
+void json_stringify(JSONNODE *json, CUTF16String &t, BOOL pretty);
+void json_set_s(JSONNODE *n, const char *value);
+void json_set_s_for_key(JSONNODE *n, json_char *key, const char *value);
+void json_set_b_for_key(JSONNODE *n, json_char *key, json_bool_t value);
+void json_set_i_for_key(JSONNODE *n, json_char *key, json_int_t value);
+CURLoption json_get_curl_option_name(JSONNODE *n);
+void json_get_curl_option_v(CURL *curl, CURLoption option, JSONNODE *n, struct curl_slist *list);
+void json_get_curl_option_m(CURL *curl, CURLoption option, JSONNODE *n);
+void json_get_curl_option_c(CURL *curl, CURLoption option, JSONNODE *n);
+void json_get_curl_option_i(CURL *curl, CURLoption option, JSONNODE *n);
+void json_get_curl_option_p(CURL *curl, CURLoption option, JSONNODE *n);
+void json_get_curl_option_s(CURL *curl, CURLoption option, JSONNODE *n);
+void json_get_curl_option_k(CURL *curl, CURLoption option, JSONNODE *n);
+long json_get_curl_option_value(JSONNODE *n);
+#endif
+
 #include "proxy.h"
 
 #include "preemptive_methods.h"
@@ -29,12 +60,6 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams);
 void json_wconv(const wchar_t *value, CUTF16String *u16);
 void json_wconv(const wchar_t *value, CUTF8String *u8);
 void json_wconv(const char *value, std::wstring &u32);
-void json_push_back_s(JSONNODE *n, const char *value);
-void json_stringify(JSONNODE *json, CUTF16String &t, BOOL pretty);
-void json_set_s(JSONNODE *n, const char *value);
-void json_set_s_for_key(JSONNODE *n, json_char *key, const char *value);
-void json_set_b_for_key(JSONNODE *n, json_char *key, json_bool_t value);
-void json_set_i_for_key(JSONNODE *n, json_char *key, json_int_t value);
 
 #define CURLOPT_AUTOPROXY 8
 #define CURLOPT_ATOMIC 73
@@ -124,17 +149,6 @@ typedef struct
 
 CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param3, C_TEXT& userInfo);
 
-CURLoption json_get_curl_option_name(JSONNODE *n);
-
-void json_get_curl_option_v(CURL *curl, CURLoption option, JSONNODE *n, struct curl_slist *list);
-void json_get_curl_option_m(CURL *curl, CURLoption option, JSONNODE *n);
-void json_get_curl_option_c(CURL *curl, CURLoption option, JSONNODE *n);
-void json_get_curl_option_i(CURL *curl, CURLoption option, JSONNODE *n);
-void json_get_curl_option_p(CURL *curl, CURLoption option, JSONNODE *n);
-void json_get_curl_option_s(CURL *curl, CURLoption option, JSONNODE *n);
-void json_get_curl_option_k(CURL *curl, CURLoption option, JSONNODE *n);
-long json_get_curl_option_value(JSONNODE *n);
-
 BOOL curl_set_options(CURL *curl, C_TEXT& Param1, C_TEXT& userInfo,
                       struct curl_slist *http_headers,
                       struct curl_slist *http_proxy_headers,
@@ -143,3 +157,5 @@ BOOL curl_set_options(CURL *curl, C_TEXT& Param1, C_TEXT& userInfo,
                       CPathString& response_path);
 
 void curl_get_info(CURL *curl, CUTF16String& json);
+
+

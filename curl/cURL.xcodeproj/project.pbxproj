@@ -70,6 +70,7 @@
 		D14F335C21A6893800E22BA5 /* preemptive_methods.h in Headers */ = {isa = PBXBuildFile; fileRef = D14F335A21A6893800E22BA5 /* preemptive_methods.h */; };
 		D14F335D21A6893800E22BA5 /* preemptive_methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D14F335B21A6893800E22BA5 /* preemptive_methods.cpp */; };
 		D175D9CD1A02E8DD0006B569 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */; };
+		D1FFADF621C24FC00014BFE7 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FFADF521C24FC00014BFE7 /* libjsoncpp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,6 +153,7 @@
 		D14F335A21A6893800E22BA5 /* preemptive_methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = preemptive_methods.h; path = preemptive/preemptive_methods.h; sourceTree = "<group>"; };
 		D14F335B21A6893800E22BA5 /* preemptive_methods.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = preemptive_methods.cpp; path = preemptive/preemptive_methods.cpp; sourceTree = "<group>"; };
 		D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D1FFADF521C24FC00014BFE7 /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = a/libjsoncpp.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1FFADF621C24FC00014BFE7 /* libjsoncpp.a in Frameworks */,
 				D14F335921A664EC00E22BA5 /* JavaScriptCore.framework in Frameworks */,
 				D14F335721A664E600E22BA5 /* SystemConfiguration.framework in Frameworks */,
 				D14F335521A6630800E22BA5 /* LDAP.framework in Frameworks */,
@@ -308,6 +311,7 @@
 		D14F333B21A662F700E22BA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1FFADF521C24FC00014BFE7 /* libjsoncpp.a */,
 				D14F335821A664EC00E22BA5 /* JavaScriptCore.framework */,
 				D14F335621A664E600E22BA5 /* SystemConfiguration.framework */,
 				D14F335421A6630800E22BA5 /* LDAP.framework */,
