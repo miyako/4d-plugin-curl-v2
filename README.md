@@ -29,6 +29,8 @@ Less callbacks (``1/256``)
 
 Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
 
+[2.9](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.9) 
+
 [2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
 
 [2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
