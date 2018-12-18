@@ -15,7 +15,7 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-* Some major changes in 2.9
+* Some major changes in 2.0
 
 Use ``jsoncpp`` instead of ``libjson``
 
@@ -25,7 +25,7 @@ Less callbacks (``1/256``)
 
 Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
 
-[2.9-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.9-carbon)  
+[3.0-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0-carbon)  
 
 [2.8-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8-carbon) added ``DEBUG`` option 
 
