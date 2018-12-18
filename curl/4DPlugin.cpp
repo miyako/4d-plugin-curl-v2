@@ -1053,6 +1053,7 @@ BOOL curl_set_options(CURL *curl,
                     case CURLOPT_TLS13_CIPHERS:
                     case CURLOPT_PROXY_TLS13_CIPHERS:
                     case CURLOPT_DOH_URL:
+                    case CURLOPT_MAIL_FROM:
                     {
                         JSONCPP_STRING value = it->asString();
                         curl_easy_setopt(curl, curl_option, value.c_str());
@@ -1245,9 +1246,6 @@ BOOL curl_set_options(CURL *curl,
                         break;
                     case CURLOPT_MAIL_RCPT:
                         json_get_curl_option_v(curl, curl_option, it, curl_slist_mail_rcpt);
-                        break;
-                    case CURLOPT_MAIL_FROM:
-                        json_get_curl_option_v(curl, curl_option, it, curl_slist_mail_from);
                         break;
                     case CURLOPT_PREQUOTE:
                         json_get_curl_option_v(curl, curl_option, it, curl_slist_prequote);
@@ -1701,16 +1699,19 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     request_ctx.pos = 0L;
     request_ctx.data = &Param2; /* request */
     request_ctx.size = 0L;
+    request_ctx.use_path = false;
     
     http_ctx response_ctx;
     response_ctx.pos = 0L;
     response_ctx.data = &Param3;/* response */
     response_ctx.size = 0L;
+    response_ctx.use_path = false;
     
     http_ctx header_ctx;
     header_ctx.pos = 0L;
     header_ctx.data = &Param7;/* headerInfo */
     header_ctx.size = 0L;
+    header_ctx.use_path = false;
     
 #if WITH_DEBUG_FUNCTION
     http_debug_ctx debug_ctx;
@@ -2402,19 +2403,23 @@ long json_get_curl_option_value(JSONNODE *n)
 #if USE_JSONCPP
 void json_get_curl_option_v(CURL *curl, CURLoption option, Json::Value::const_iterator n, struct curl_slist *list)
 {
-    if(list)
+    if(n->isArray())
     {
-        if(n->isArray())
+        BOOL hasValue = false;
+        for(Json::Value::const_iterator it = n->begin() ; it != n->end() ; it++)
         {
-            for(Json::Value::const_iterator it = n->begin() ; it != n->end() ; it++)
+            if(it->isString())
             {
-                if(it->isString())
-                {
-                    JSONCPP_STRING value = it->asString();
-                    list = curl_slist_append(list, value.c_str());
-                }
+                JSONCPP_STRING value = it->asString();
+                list = curl_slist_append(list, value.c_str());
+                hasValue = true;
             }
         }
+        if(hasValue) curl_easy_setopt(curl, option, list);
+    }else if(n->isString())
+    {
+        JSONCPP_STRING value = n->asString();
+        list = curl_slist_append(list, value.c_str());
         curl_easy_setopt(curl, option, list);
     }
 }
