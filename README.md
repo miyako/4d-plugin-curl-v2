@@ -535,8 +535,3 @@ $error:=cURL (JSON Stringify($options);$requests;$response;$callback;$transferIn
 SHOW ON DISK(Get 4D folder(Logs folder);*)
 ```
 
----
-
-<img width="945" alt="2018-12-08 11 35 34" src="https://user-images.githubusercontent.com/1725068/49680913-7b691200-fadd-11e8-87cd-23da63e9bf41.png">
-
-<img width="988" alt="2018-11-28 20 36 16" src="https://user-images.githubusercontent.com/1725068/49149400-4de9cf00-f34d-11e8-9990-9ff093b78d99.png">
