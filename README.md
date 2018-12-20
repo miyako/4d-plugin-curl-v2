@@ -418,6 +418,20 @@ Not supported
 
 ---
 
+### Tips
+
+* SMTP
+
+You might want to enable ``FORBID_REUSE`` if your plan is to use different credentials in a batch process. By default, cURL re-uses the TCP connection, which may not be what you want.
+
+You can pass a collection or string to ``MAIL_TO``. But you can only pass string to ``MAIL_FROM``.
+
+You must pass a simple email adress to ``MAIL_FROM``. You can NOT pass the email address with a display name, as you would do for the SMTP header. (It is your responsibility to include a well-formatted ``From`` header in the SMTP request.
+
+* Any
+
+By default, cURL has a very tolerant timeout setting. In production, you might want to explicitly set all the timeout options.
+
 ```
 escape:=cURL_Escape(url)
 ```
