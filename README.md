@@ -15,25 +15,21 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-* Some major changes in 2.0
+* Some major changes in 3.0
 
 Use ``jsoncpp`` instead of ``libjson``
 
 Less callbacks (``1/256``) 
 
-``DELAY PRCESS 0`` when no callbacks are defined
+[3.0](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0) 
 
-Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
+[2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
 
-[3.0-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0-carbon)  
+[2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
 
-[2.8-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8-carbon) added ``DEBUG`` option 
+[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
 
-[2.4-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4-carbon) openssl ``1.1`` on windows
-
-[2.3-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3-carbon) atomic option
-
-[2.2-carbon](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2-carbon) windows support
+[2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
 
 ## Syntax
 
@@ -337,7 +333,7 @@ Value|Type|Description
 [HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|text array
 [RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|text array
 [MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|text array
-[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|text array
+[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |TEXT|
 [PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|text array
 [POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|text array
 [QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|text array
@@ -413,6 +409,20 @@ Not supported
 ``RESOLVER_START_DATA``  
 
 ---
+
+### Tips
+
+* SMTP
+
+You might want to enable ``FORBID_REUSE`` if your plan is to use different credentials in a batch process. By default, cURL re-uses the TCP connection, which may not be what you want.
+
+You can pass a collection or string to ``MAIL_TO``. But you can only pass string to ``MAIL_FROM``.
+
+You must pass a simple email adress to ``MAIL_FROM``. You can NOT pass the email address with a display name, as you would do for the SMTP header. (It is your responsibility to include a well-formatted ``From`` header in the SMTP request.
+
+* Any
+
+By default, cURL has a very tolerant timeout setting. In production, you might want to explicitly set all the timeout options.
 
 ```
 escape:=cURL_Escape(url)
@@ -493,3 +503,27 @@ $seconds_32:=cURL_GetDate ("2038 Nov 6 08:49:37";$seconds_64)  //-1, "2172646177
 $seconds_32:=cURL_GetDate ("1583 Nov 6 08:49:37";$seconds_64)  //-1, "-12185824223"
 $seconds_32:=cURL_GetDate ("1582 Nov 6 08:49:37";$seconds_64)  //-1, ""
 ```
+
+**Note**: dates after 2038 or before 1970 seems to return different values on windows.
+
+``DEBUG`` example
+
+```
+C_OBJECT($options)
+
+OB SET($options;"URL";"https://github.com/miyako/4d-plugin-curl-v2/blob/master/curl/4DPlugin.cpp")
+
+$options.DEBUG:=Get 4D folder(Logs folder)
+$options.SSL_VERIFYPEER:=0
+$options.SSL_VERIFYHOST:=0
+
+$callback:=""
+
+C_TEXT($transferInfo;$headerInfo)
+C_BLOB($request;$response)
+
+$error:=cURL (JSON Stringify($options);$requests;$response;$callback;$transferInfo;$headerInfo)
+
+SHOW ON DISK(Get 4D folder(Logs folder);*)
+```
+
