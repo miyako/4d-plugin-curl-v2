@@ -25,10 +25,6 @@ Use ``jsoncpp`` instead of ``libjson``
 
 Less callbacks (``1/256``) 
 
-``DELAY PRCESS 0`` when no callbacks are defined
-
-Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
-
 [3.0](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0) 
 
 [2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
