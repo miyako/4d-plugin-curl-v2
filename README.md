@@ -341,7 +341,7 @@ Value|Type|Description
 [HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|text array
 [RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|text array
 [MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|text array
-[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|text array
+[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |TEXT|
 [PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|text array
 [POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|text array
 [QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|text array
