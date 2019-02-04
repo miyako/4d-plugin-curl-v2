@@ -157,8 +157,9 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
 #endif
     
 #if LESS_CALLBACK
+    time_t startTime = time(0);
+    #define YIELD_FACTOR 0x0100
     unsigned int yield_counter = 0;
-    #define YIELD_FACTOR 0x100
 #endif
     
     bool isCallbackSet = Param4.getUTF16Length();
@@ -263,9 +264,12 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
                 if(isCallbackSet)
                 {
 #if LESS_CALLBACK
-                    if((yield_counter % YIELD_FACTOR) == 0)
+                    time_t now = time(0);
+                    time_t elapsedTime = abs(startTime - now);
+                    if(elapsedTime > 0)
                     {
-                        yield_counter = 1;
+                        startTime = now;
+#endif
                         if(1)
                         {
                             std::lock_guard<std::mutex> lock(mutexMcurl);
@@ -301,16 +305,14 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
                                 goto curl_abort_transfer;
                             }
                         }
-                    }else
-                    {
-                        yield_counter++;
+#if LESS_CALLBACK
                     }
 #endif
                 }else
                 {
                     /* no callback */
 #if YIELD_NO_CALLBACK
-                    PA_PutProcessToSleep2(currentProcessNumber, 0);
+                    PA_PutProcessToSleep2(currentProcessNumber, 6);//100ms
 #endif
                 }
                 
@@ -2586,79 +2588,111 @@ void curl_get_info(CURL *curl, CUTF16String& json)
     char *primaryIp = NULL;
     char *rtspSessionId = NULL;
     
+    curl_off_t speedUploadT, speedDownloadT, sizeUploadT, sizeDownloadT, contentLengthDownloadT, contentLengthUploadT;
+    
 #if USE_JSONCPP
 #define JSONCPP_STRING_VALUE(s) s ? s : ""
     
     Json::Value info;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONDITION_UNMET, &conditionUnmet))
-        info["conditionUnmet"] = (Json::Int)conditionUnmet;
+        info["conditionUnmet"] = (Json::Int64)conditionUnmet;
 
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_UPLOAD, &contentLengthUpload))
-        info["contentLengthUpload"] = contentLengthUpload;
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_UPLOAD, &contentLengthUpload))
+     info["contentLengthUpload"] = contentLengthUpload;
+     */
+
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_UPLOAD_T, &contentLengthUploadT))
+        info["contentLengthUpload"] = (Json::Int64)contentLengthUploadT;
+    
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &contentLengthDownload))
+     info["contentLengthDownload"] = contentLengthDownload;
+     */
+    
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD_T, &contentLengthDownloadT))
+        info["contentLengthDownload"] = (Json::Int64)contentLengthDownloadT;
+    
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_UPLOAD, &speedUpload))
+     info["speedUpload"] = speedUpload;
+     */
+    
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_UPLOAD_T, &speedUploadT))
+        info["speedUpload"] = (Json::UInt64)speedUploadT;
+ 
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD, &speedDownload))
+     info["speedDownload"] = speedDownload;
+     */
+    
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD_T, &speedDownloadT))
+        info["speedDownload"] = (Json::UInt64)speedDownloadT;
+    
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD, &sizeDownload))
+     info["sizeDownload"] = sizeDownload;
+     */
+    
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD_T, &sizeDownloadT))
+        info["sizeDownload"] = (Json::UInt64)sizeDownloadT;
+    
+    /*
+     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD, &sizeUpload))
+     info["sizeUpload"] = sizeUpload;
+     */
+    
+    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD_T, &sizeUploadT))
+        info["sizeUpload"] = (Json::UInt64)sizeUploadT;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_RTSP_CLIENT_CSEQ, &rtspClientCseq))
-        info["rtspClientCseq"] = (Json::Int)rtspClientCseq;
+        info["rtspClientCseq"] = (Json::Int64)rtspClientCseq;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_RTSP_SERVER_CSEQ, &rtspServerCseq))
-        info["rtspServerCseq"] = (Json::Int)rtspServerCseq;
+        info["rtspServerCseq"] = (Json::Int64)rtspServerCseq;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_RTSP_CSEQ_RECV, &rtspCseqRecv))
-        info["rtspCseqRecv"] = (Json::Int)rtspCseqRecv;
+        info["rtspCseqRecv"] = (Json::Int64)rtspCseqRecv;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_LASTSOCKET, &lastSocket))
-        info["lastSocket"] = (Json::Int)lastSocket;
+        info["lastSocket"] = (Json::Int64)lastSocket;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_PRIMARY_PORT, &primaryPort))
-        info["primaryPort"] = (Json::Int)primaryPort;
+        info["primaryPort"] = (Json::Int64)primaryPort;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_LOCAL_PORT, &localPort))
-        info["localPort"] = (Json::Int)localPort;
-    
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &contentLengthDownload))
-        info["contentLengthDownload"] = contentLengthDownload;
+        info["localPort"] = (Json::Int64)localPort;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_HTTP_CONNECTCODE, &connectCode))
-        info["connectCode"] = (Json::Int)connectCode;
+        info["connectCode"] = (Json::Int64)connectCode;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_FILETIME, &fileTime))
-        info["fileTime"] = (Json::Int)fileTime;
+        info["fileTime"] = (Json::Int64)fileTime;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &totalTime))
         info["totalTime"] = totalTime;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_REQUEST_SIZE , &requestSize))
-        info["requestSize"] = (Json::Int)requestSize;
+        info["requestSize"] = (Json::Int64)requestSize;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_HEADER_SIZE, &headerSize))
-        info["headerSize"] = (Json::Int)headerSize;
-    
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_UPLOAD, &speedUpload))
-        info["speedUpload"] = speedUpload;
-    
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD, &speedDownload))
-        info["speedDownload"] = speedDownload;
-    
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD, &sizeDownload))
-        info["sizeDownload"] = sizeDownload;
-    
-    if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD, &sizeUpload))
-        info["sizeUpload"] = sizeUpload;
-    
+        info["headerSize"] = (Json::Int64)headerSize;
+
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_HTTPAUTH_AVAIL, &httpAuthAvail))
-        info["httpAuthAvail"] = (Json::Int)httpAuthAvail;
+        info["httpAuthAvail"] = (Json::Int64)httpAuthAvail;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_PROXYAUTH_AVAIL, &proxyAuthAvail))
-        info["proxyAuthAvail"] = (Json::Int)proxyAuthAvail;
+        info["proxyAuthAvail"] = (Json::Int64)proxyAuthAvail;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_OS_ERRNO, &osErrNo))
-        info["osErrNo"] = (Json::Int)osErrNo;
+        info["osErrNo"] = (Json::Int64)osErrNo;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_NUM_CONNECTS, &numConnects))
-        info["numConnects"] = (Json::Int)numConnects;
+        info["numConnects"] = (Json::Int64)numConnects;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode))
-        info["responseCode"] = (Json::Int)responseCode;
+        info["responseCode"] = (Json::Int64)responseCode;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_NAMELOOKUP_TIME, &nameLookupTime))
         info["nameLookupTime"] = nameLookupTime;
@@ -2679,10 +2713,10 @@ void curl_get_info(CURL *curl, CUTF16String& json)
         info["redirectTime"] = redirectTime;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_SSL_VERIFYRESULT , &sslVerifyResult))
-        info["sslVerifyResult"] = (Json::Int)sslVerifyResult;
+        info["sslVerifyResult"] = (Json::Int64)sslVerifyResult;
     
     if(CURLE_OK == curl_easy_getinfo(curl, CURLINFO_REDIRECT_COUNT, &redirectCount))
-        info["redirectCount"] = (Json::Int)redirectCount;
+        info["redirectCount"] = (Json::Int64)redirectCount;
     
     if((CURLE_OK == curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effectiveUrl)))
         info["effectiveUrl"] = JSONCPP_STRING_VALUE(effectiveUrl);
