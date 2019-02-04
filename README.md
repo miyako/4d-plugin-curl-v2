@@ -19,15 +19,13 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[3.1](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.1) fix SFTP infinite problem on windows 32-bit
+
 * Some major changes in 3.0
 
 Use ``jsoncpp`` instead of ``libjson``
 
 Less callbacks (``1/256``) 
-
-``DELAY PRCESS 0`` when no callbacks are defined
-
-Callback method identified by ID (**compatibility break**; no longer possible to call a component method)
 
 [3.0](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0) 
 
@@ -341,7 +339,7 @@ Value|Type|Description
 [HTTP200ALIASES](https://curl.haxx.se/libcurl/c/CURLOPT_HTTP200ALIASES.html) |COLLECTION|text array
 [RESOLVE](https://curl.haxx.se/libcurl/c/CURLOPT_RESOLVE.html) |COLLECTION|text array
 [MAIL_RCPT](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_RCPT.html) |COLLECTION|text array
-[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |COLLECTION|text array
+[MAIL_FROM](https://curl.haxx.se/libcurl/c/CURLOPT_MAIL_FROM.html) |TEXT|
 [PREQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_PREQUOTE.html) |COLLECTION|text array
 [POSTQUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_POSTQUOTE.html) |COLLECTION|text array
 [QUOTE](https://curl.haxx.se/libcurl/c/CURLOPT_QUOTE.html) |COLLECTION|text array
@@ -417,6 +415,20 @@ Not supported
 ``RESOLVER_START_DATA``  
 
 ---
+
+### Tips
+
+* SMTP
+
+You might want to enable ``FORBID_REUSE`` if your plan is to use different credentials in a batch process. By default, cURL re-uses the TCP connection, which may not be what you want.
+
+You can pass a collection or string to ``MAIL_TO``. But you can only pass string to ``MAIL_FROM``.
+
+You must pass a simple email adress to ``MAIL_FROM``. You can NOT pass the email address with a display name, as you would do for the SMTP header. (It is your responsibility to include a well-formatted ``From`` header in the SMTP request.
+
+* Any
+
+By default, cURL has a very tolerant timeout setting. In production, you might want to explicitly set all the timeout options.
 
 ```
 escape:=cURL_Escape(url)
@@ -521,8 +533,3 @@ $error:=cURL (JSON Stringify($options);$requests;$response;$callback;$transferIn
 SHOW ON DISK(Get 4D folder(Logs folder);*)
 ```
 
----
-
-<img width="945" alt="2018-12-08 11 35 34" src="https://user-images.githubusercontent.com/1725068/49680913-7b691200-fadd-11e8-87cd-23da63e9bf41.png">
-
-<img width="988" alt="2018-11-28 20 36 16" src="https://user-images.githubusercontent.com/1725068/49149400-4de9cf00-f34d-11e8-9990-9ff093b78d99.png">
