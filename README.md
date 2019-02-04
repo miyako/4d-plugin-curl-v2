@@ -15,21 +15,7 @@ Generic network client based on libcurl-7.62.0
 
 ### Releases
 
-* Some major changes in 3.0
-
-Use ``jsoncpp`` instead of ``libjson``
-
-Less callbacks (``1/256``) 
-
-[3.0](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.0) 
-
-[2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
-
-[2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
-
-[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
-
-[2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
+[3.1](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.1-carbon)
 
 ## Syntax
 
