@@ -19,6 +19,8 @@ use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for
 
 ### Releases
 
+[3.1](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.1) fix SFTP infinite problem on windows 32-bit
+
 * Some major changes in 3.0
 
 Use ``jsoncpp`` instead of ``libjson``
