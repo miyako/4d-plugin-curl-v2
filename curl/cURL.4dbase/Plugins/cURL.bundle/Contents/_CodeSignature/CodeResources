@@ -404,11 +404,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a9sqHDz60KAIv6tyiKbkugqoDy4=
+			6hDDeVI5fQI/8Ynuk+co2y+vjxw=
 			</data>
 			<key>hash2</key>
 			<data>
-			8hVcSLw5sf88R0YSL6oXX8W+fFzANwFHOin4xwKAVCY=
+			7L9VXTVYCIWyUTrL1t53wf5mw4Cg+uRJcHK9yJQBx70=
 			</data>
 		</dict>
 		<key>Windows/vcruntime140.dll</key>
@@ -426,11 +426,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kNcU+xUbWDgChjhUpMuJgASSJmA=
+			dW9Tc/Bv5fzzMd6vVTVyQLpqcZg=
 			</data>
 			<key>hash2</key>
 			<data>
-			3r+lzNeflQO9vyIP96ljlvThVNI0HqL9SNOmoalSbi4=
+			CpNlAVoGFM9MTYQcWBHiJm9RNYGcFUIP6uJSTBXPL/4=
 			</data>
 		</dict>
 		<key>Windows64/vcruntime140.dll</key>
@@ -448,10 +448,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			W9IGdFKan2f7iGVZ1w8jmwX/Tgk=
+			4NY7L/qBJD5mATScfta8NW/lSeE=
 			</data>
 			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
+			<string>identifier manifest and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: keisuke miyako (4W9UT59D3B)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
 	</dict>
 	<key>rules</key>
