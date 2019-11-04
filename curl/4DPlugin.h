@@ -48,14 +48,12 @@ long json_get_curl_option_value(JSONNODE *n);
 
 #include "proxy.h"
 
-#include "preemptive_methods.h"
-
 // --- cURL
-void cURL_VersionInfo(sLONG_PTR *pResult, PackagePtr pParams);
-void cURL_Escape(sLONG_PTR *pResult, PackagePtr pParams);
-void cURL_Unescape(sLONG_PTR *pResult, PackagePtr pParams);
-void cURL_GetDate(sLONG_PTR *pResult, PackagePtr pParams);
-void _cURL(sLONG_PTR *pResult, PackagePtr pParams);
+void cURL_VersionInfo(PA_PluginParameters params);
+void cURL_Escape(PA_PluginParameters params);
+void cURL_Unescape(PA_PluginParameters params);
+void cURL_GetDate(PA_PluginParameters params);
+void _cURL(PA_PluginParameters params);
 
 void json_wconv(const wchar_t *value, CUTF16String *u16);
 void json_wconv(const wchar_t *value, CUTF8String *u8);

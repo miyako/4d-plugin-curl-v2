@@ -73,7 +73,6 @@
       <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
     </ClCompile>
     <ClCompile Include="ufopen.c" />
-    <ClCompile Include="preemptive\preemptive_methods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="4DPlugin.h">
@@ -143,7 +142,6 @@
       <Filter>Source\4D Plugin API\Classes\ARRAY</Filter>
     </ClInclude>
     <ClInclude Include="ufopen.h" />
-    <ClInclude Include="preemptive\preemptive_methods.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="4D Plugin API\4DPluginAPI.def">

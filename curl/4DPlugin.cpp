@@ -70,54 +70,52 @@ void PluginMain(PA_long32 selector, PA_PluginParameters params)
 {
 	try
 	{
-		PA_long32 pProcNum = selector;
-		sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
-		PackagePtr pParams = (PackagePtr)params->fParameters;
+//        PA_long32 pProcNum = selector;
+//        sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+//        PackagePtr pParams = (PackagePtr)params->fParameters;
+        
+        switch(selector)
+        {
+            case kInitPlugin :
+            case kServerInitPlugin :
+                OnStartup();
+                break;
+                
+            case kDeinitPlugin :
+                OnExit();
+                break;
+                // --- cURL
+                
+            case 1 :
+                cURL_VersionInfo(params);
+                break;
+                
+            case 2 :
+                cURL_Escape(params);
+                break;
+                
+            case 3 :
+                cURL_Unescape(params);
+                break;
+                
+            case 4 :
+                cURL_GetDate(params);
+                break;
+                
+            case 5 :
+                _cURL(params);
+                break;
+                
+        }
 
-		CommandDispatcher(pProcNum, pResult, pParams); 
-	}
+    }
 	catch(...)
 	{
 
 	}
 }
 
-void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pParams)
-{
-	switch(pProcNum)
-	{
-        case kInitPlugin :
-        case kServerInitPlugin :
-            OnStartup();
-            break;
-            
-        case kDeinitPlugin :
-            OnExit();
-            break;
-// --- cURL
 
-		case 1 :
-			cURL_VersionInfo(pResult, pParams);
-			break;
-
-		case 2 :
-			cURL_Escape(pResult, pParams);
-			break;
-
-		case 3 :
-			cURL_Unescape(pResult, pParams);
-			break;
-
-		case 4 :
-			cURL_GetDate(pResult, pParams);
-			break;
-
-		case 5 :
-			_cURL(pResult, pParams);
-			break;
-
-	}
-}
 
 // ------------------------------------- cURL -------------------------------------
 
@@ -139,50 +137,48 @@ CURLcode curl_perform(CURL *curl, C_TEXT& Param4, C_TEXT& userInfo)
     return result;
 }
 
-CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo)
-{
+CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo) {
+    
     /* callback argument or return value if method name is empty */
+    
     CUTF16String info;
     CURLMcode mc = CURLM_OK; /* not used to abort */
     CURLcode result = CURLE_OK;
     
     PA_long32 currentProcessNumber = PA_GetCurrentProcessNumber();
     
-    /* prepare for callback */
-    PA_Variable    params[4];
 #if USE_PA_EXECUTE_METHOD_BY_ID
     PA_long32 method_id = PA_GetMethodID((PA_Unichar *)Param4.getUTF16StringPtr());
 #else
     PA_long32 method_id = 0;
 #endif
     
-#if LESS_CALLBACK
     time_t startTime = time(0);
-    #define YIELD_FACTOR 0x0100
-    unsigned int yield_counter = 0;
-#endif
     
     bool isCallbackSet = Param4.getUTF16Length();
     
+    PA_Variable    cbparams[4];
+    
     if(method_id)
     {
-        params[0] = PA_CreateVariable(eVK_Unistring);
-        params[1] = PA_CreateVariable(eVK_Unistring);
-        params[2] = PA_CreateVariable(eVK_Undefined);
-        params[3] = PA_CreateVariable(eVK_Undefined);
-        PA_SetUnistring((&(params[1].uValue.fString)),
+        cbparams[0] = PA_CreateVariable(eVK_Unistring);
+        cbparams[1] = PA_CreateVariable(eVK_Unistring);
+        cbparams[2] = PA_CreateVariable(eVK_Undefined);
+        cbparams[3] = PA_CreateVariable(eVK_Undefined);
+        PA_SetUnistring((&(cbparams[1].uValue.fString)),
                         (PA_Unichar *)userInfo.getUTF16StringPtr());
     }else
     {
-        params[0] = PA_CreateVariable(eVK_Unistring);
-        params[1] = PA_CreateVariable(eVK_Boolean);
-        params[2] = PA_CreateVariable(eVK_Unistring);
-        params[3] = PA_CreateVariable(eVK_Unistring);
-        PA_SetUnistring((&(params[0].uValue.fString)),
+        cbparams[0] = PA_CreateVariable(eVK_Unistring);
+        cbparams[1] = PA_CreateVariable(eVK_Boolean);
+        cbparams[2] = PA_CreateVariable(eVK_Unistring);
+        cbparams[3] = PA_CreateVariable(eVK_Unistring);
+        PA_SetUnistring((&(cbparams[0].uValue.fString)),
                         (PA_Unichar *)Param4.getUTF16StringPtr());
-        PA_SetUnistring((&(params[3].uValue.fString)),
+        PA_SetUnistring((&(cbparams[3].uValue.fString)),
                         (PA_Unichar *)userInfo.getUTF16StringPtr());
     }
+    
     int running_handles = 0;
     
     if(1)
@@ -238,7 +234,19 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
         if(maxfd == -1)
         {
             /* https://curl.haxx.se/libcurl/c/multi-post.html */
-            PA_PutProcessToSleep2(currentProcessNumber, 6);//100ms
+            
+            PA_Variable params[2];
+            params[0] = PA_CreateVariable(eVK_Longint);
+            PA_SetLongintVariable(&params[0], currentProcessNumber);
+            
+            params[1] = PA_CreateVariable(eVK_Real);
+            PA_SetRealVariable(&params[1], 6);//100ms
+            
+            PA_ExecuteCommandByID(323 /*DELAY_PROCESS*/ , params, 2);
+            
+            PA_ClearVariable(&params[0]);
+            PA_ClearVariable(&params[1]);
+            
             rc = 0;
         }
         else
@@ -259,64 +267,71 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
                     mc = curl_multi_perform(mcurl, &running_handles);
                     /* callback method */
                 }
-                
             {
-                if(isCallbackSet)
+                
+                time_t now = time(0);
+                time_t elapsedTime = abs(startTime - now);
+                
+                if(elapsedTime > 0)
                 {
-#if LESS_CALLBACK
-                    time_t now = time(0);
-                    time_t elapsedTime = abs(startTime - now);
-                    if(elapsedTime > 0)
+                    startTime = now;
+                    
+                    if(isCallbackSet)
                     {
-                        startTime = now;
-#endif
-                        if(1)
+                        
+                        time_t now = time(0);
+                        time_t elapsedTime = abs(startTime - now);
+                        if(elapsedTime > 0)
                         {
-                            std::lock_guard<std::mutex> lock(mutexMcurl);
+                            startTime = now;
                             
-                            curl_get_info(curl, info);
-                        }
-                        if(method_id)
-                        {
-                            PA_SetUnistring((&(params[0].uValue.fString)),
-                                            (PA_Unichar *)info.c_str());
-                            
-                            PA_Variable statusCode = PA_ExecuteMethodByID(method_id, params, 2);
-                            if(PA_GetVariableKind(statusCode) == eVK_Boolean)
+                            if(1)
                             {
-                                if(PA_GetBooleanVariable(statusCode))
+                                std::lock_guard<std::mutex> lock(mutexMcurl);
+                                
+                                curl_get_info(curl, info);
+                            }
+                            if(method_id)
+                            {
+                                PA_SetUnistring((&(cbparams[0].uValue.fString)),
+                                                (PA_Unichar *)info.c_str());
+                                
+                                PA_Variable statusCode = PA_ExecuteMethodByID(method_id, cbparams, 2);
+                                if(PA_GetVariableKind(statusCode) == eVK_Boolean)
+                                {
+                                    if(PA_GetBooleanVariable(statusCode))
+                                    {
+                                        /* abort */
+                                        result = CURLE_ABORTED_BY_CALLBACK;
+                                        goto curl_abort_transfer;
+                                    }
+                                }
+                            }else
+                            {
+                                PA_SetUnistring((&(cbparams[2].uValue.fString)),
+                                                (PA_Unichar *)info.c_str());
+                                
+                                PA_SetBooleanVariable(&cbparams[1], false);
+                                PA_ExecuteCommandByID(1007, cbparams, 4);
+                                if(PA_GetBooleanVariable(cbparams[1]))
                                 {
                                     /* abort */
                                     result = CURLE_ABORTED_BY_CALLBACK;
                                     goto curl_abort_transfer;
                                 }
                             }
-                        }else
-                        {
-                            PA_SetUnistring((&(params[2].uValue.fString)),
-                                            (PA_Unichar *)info.c_str());
-                            
-                            PA_SetBooleanVariable(&params[1], false);
-                            PA_ExecuteCommandByID(1007, params, 4);
-                            if(PA_GetBooleanVariable(params[1]))
-                            {
-                                /* abort */
-                                result = CURLE_ABORTED_BY_CALLBACK;
-                                goto curl_abort_transfer;
-                            }
                         }
-#if LESS_CALLBACK
+                    }else
+                    {
+                        PA_YieldAbsolute();
                     }
-#endif
-                }else
-                {
-                    /* no callback */
-#if YIELD_NO_CALLBACK
-                    PA_PutProcessToSleep2(currentProcessNumber, 6);//100ms
-#endif
                 }
                 
-                if(PA_IsProcessDying2())
+                PA_Variable params;
+                bool isProcessDying = PA_GetBooleanVariable(PA_ExecuteCommandByID(672/* Process aborted */, &params, 0));
+                /* PA_IsProcessDying is not threadSafe */
+                
+                if(isProcessDying)
                 {
                     /* abort (runtime explorer, not debugger) */
                     result = CURLE_ABORTED_BY_CALLBACK;
@@ -331,10 +346,10 @@ CURLcode curl_perform(CURLM *mcurl, CURL *curl, C_TEXT& Param4, C_TEXT& userInfo
     
 curl_abort_transfer:
     
-    PA_ClearVariable(&params[0]);
-    PA_ClearVariable(&params[1]);
-    PA_ClearVariable(&params[2]);
-    PA_ClearVariable(&params[3]);
+    PA_ClearVariable(&cbparams[0]);
+    PA_ClearVariable(&cbparams[1]);
+    PA_ClearVariable(&cbparams[2]);
+    PA_ClearVariable(&cbparams[3]);
     
     struct CURLMsg *m;
     int msgq = 0;
@@ -360,6 +375,7 @@ curl_abort_transfer:
     
     return result;
 }
+
 
 #pragma mark function
 
@@ -500,11 +516,12 @@ size_t curl_write_function(void *buffer,
 
 #pragma mark tools
 
-void cURL_Escape(sLONG_PTR *pResult, PackagePtr pParams)
+void cURL_Escape(PA_PluginParameters params)
 {
     C_TEXT Param1;
     C_TEXT returnValue;
     
+    PackagePtr pParams = (PackagePtr)params->fParameters;
     Param1.fromParamAtIndex(pParams, 1);
     
     CURL *curl = curl_easy_init();
@@ -527,14 +544,16 @@ void cURL_Escape(sLONG_PTR *pResult, PackagePtr pParams)
         curl_easy_cleanup(curl);
     }
 
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
 	returnValue.setReturn(pResult);
 }
 
-void cURL_Unescape(sLONG_PTR *pResult, PackagePtr pParams)
+void cURL_Unescape(PA_PluginParameters params)
 {
     C_TEXT Param1;
     C_TEXT returnValue;
     
+    PackagePtr pParams = (PackagePtr)params->fParameters;
     Param1.fromParamAtIndex(pParams, 1);
     
     CURL *curl = curl_easy_init();
@@ -558,15 +577,17 @@ void cURL_Unescape(sLONG_PTR *pResult, PackagePtr pParams)
         curl_easy_cleanup(curl);
     }
 
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
 	returnValue.setReturn(pResult);
 }
 
-void cURL_GetDate(sLONG_PTR *pResult, PackagePtr pParams)
+void cURL_GetDate(PA_PluginParameters params)
 {
 	C_TEXT Param1;
 	C_TEXT Param2;
 	C_LONGINT returnValue;
 
+    PackagePtr pParams = (PackagePtr)params->fParameters;
 	Param1.fromParamAtIndex(pParams, 1);
     
     CUTF8String datestring;
@@ -588,10 +609,12 @@ void cURL_GetDate(sLONG_PTR *pResult, PackagePtr pParams)
     }
 
 	Param2.toParamAtIndex(pParams, 2);
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
 	returnValue.setReturn(pResult);
 }
 
-void cURL_VersionInfo(sLONG_PTR *pResult, PackagePtr pParams)
+void cURL_VersionInfo(PA_PluginParameters params)
 {
     C_TEXT returnValue;
     CUTF16String json;
@@ -732,6 +755,7 @@ void cURL_VersionInfo(sLONG_PTR *pResult, PackagePtr pParams)
     json_delete(info);
 #endif
     
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
     returnValue.setUTF16String(&json);
     returnValue.setReturn(pResult);
 }
@@ -1644,7 +1668,7 @@ BOOL curl_set_options(CURL *curl,
     return isAtomic;
 }
 
-void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
+void _cURL(PA_PluginParameters params)
 {
 	C_TEXT Param1; /* options */
 	C_BLOB Param2; /* request */
@@ -1656,6 +1680,7 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     C_BLOB Param7;
 	C_LONGINT returnValue;
 
+    PackagePtr pParams = (PackagePtr)params->fParameters;
 	Param1.fromParamAtIndex(pParams, 1);
 	Param2.fromParamAtIndex(pParams, 2);
 	Param4.fromParamAtIndex(pParams, 4);
@@ -1835,9 +1860,14 @@ void _cURL(sLONG_PTR *pResult, PackagePtr pParams)
     curl_easy_cleanup(curl);
     //    curl_multi_cleanup(mcurl);
     
-	Param3.toParamAtIndex(pParams, 3); /* response */
+    
+    PA_SetBlobParameter(params, 3, (void*)Param3.getBytesPtr(), Param3.getBytesLength());
+//    Param3.toParamAtIndex(pParams, 3); /* response */
+    
 	Param5.toParamAtIndex(pParams, 5); /* transferInfo */
 	Param6.toParamAtIndex(pParams, 6); /* headerInfo */
+    
+    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
 	returnValue.setReturn(pResult);
 }
 
