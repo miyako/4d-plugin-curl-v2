@@ -1238,7 +1238,13 @@ BOOL curl_set_options(CURL *curl,
                     case CURLOPT_DISALLOW_USERNAME_IN_URL:
                     case CURLOPT_UPLOAD_BUFFERSIZE:
                     case CURLOPT_UPKEEP_INTERVAL_MS:
-                        curl_easy_setopt(curl, curl_option, it->asInt());
+                        if(it->isNumeric())
+                        {
+                            curl_easy_setopt(curl, curl_option, it->asInt());
+                        }else if(it->isString())
+                        {
+                            curl_easy_setopt(curl, curl_option, atoi(it->asString().c_str()));
+                        }
                         break;
                         /* constant or long */
                     case CURLOPT_USE_SSL:
@@ -2128,7 +2134,7 @@ CURLoption json_get_curl_option_name(JSONNODE *n)
             CHECK_CURLOPT("AUTOPROXY",CURLOPT_AUTOPROXY)
             CHECK_CURLOPT("PRIVATE",CURLOPT_PRIVATE)
             CHECK_CURLOPT("ATOMIC",CURLOPT_ATOMIC)
-            CHECK_CURLOPT("DEBUG",CURLOPT_VERBOSE)
+//            CHECK_CURLOPT("DEBUG",CURLOPT_VERBOSE)
             
             /* string */
             CHECK_CURLOPT("PROXY",CURLOPT_PROXY)

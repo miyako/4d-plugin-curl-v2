@@ -7,6 +7,12 @@ Generic network client based on libcurl-7.62.0
 |:------:|:-----:|:---------:|:---------:|
 ||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
 
+```
+spctl -a -vv -t install cURL.bundle: accepted
+source=Notarized Developer ID
+origin=Developer ID Application: keisuke miyako (Y69CWUC25B)
+```
+
 __Mac version is now 64-bit only!__ 
 
 use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for 32-bit support

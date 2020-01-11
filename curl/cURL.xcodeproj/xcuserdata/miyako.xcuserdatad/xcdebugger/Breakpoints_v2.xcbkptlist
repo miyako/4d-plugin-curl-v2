@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "767AA517-69E7-4255-88CF-77B5DDE1DD1A"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "8EA19AC8-9069-4D4E-BA42-A7436DD5A61F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -15,7 +17,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2404"
             endingLineNumber = "2404"
-            landmarkName = "json_get_curl_option_value(JSONNODE *n)"
+            landmarkName = "json_get_curl_option_value(n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E86A95A2-ED2A-417F-A7A6-4281997830A0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "4DPlugin.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2543"
+            endingLineNumber = "2543"
+            landmarkName = "json_get_curl_option_c(curl, option, n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "07552DD0-9B9D-418E-B873-9FAA2315AA84"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "4DPlugin.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1625"
+            endingLineNumber = "1625"
+            landmarkName = "curl_set_options(curl, Param1, request_path, response_path, userInfo, curl_slist_connect_to, curl_slist_proxy_header, curl_slist_http_header, curl_slist_http_200_aliases, curl_slist_resolve, curl_slist_mail_rcpt, curl_slist_mail_from, curl_slist_prequote, curl_slist_postquote, curl_slist_quote, curl_slist_telnet_options)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
