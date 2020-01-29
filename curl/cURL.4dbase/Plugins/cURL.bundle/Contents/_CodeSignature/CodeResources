@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x9Vq9v2pxDvulph+SH+M4mIXuso=
+			xjCkgHQ4vxycBB/3E0LqOASHeIY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -108,10 +108,6 @@
 		<key>Resources/constants.xlf</key>
 		<data>
 		UbZYnK1QdI2HA5cO0/aNT2a+ucQ=
-		</data>
-		<key>Resources/manifest.json</key>
-		<data>
-		7AzrXo3gDNL+Ljj1Sgpoin1GRAs=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -288,7 +284,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BkrlEfj/0+b3Ye645gw38EUhTJ3KNogSesn+zVZZfDM=
+			d71MXFqS/0yaDPLeiUo9t91F3oBpSGTMIp75vs7HIxE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -300,18 +296,11 @@
 			7t2nF9u/4W05GOd8UQ7QAt/PFge16k3ydWYX/6ElmJk=
 			</data>
 		</dict>
-		<key>Resources/manifest.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ytBDWZEdEL1yo+eM1RuqeRMj2Pz4Hhma6jhDccjLZpE=
-			</data>
-		</dict>
 		<key>Windows/cURL.4DX</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HcO6CwBU4xFFAo2XIDKJIyVJ9vfGHNvoBNy87Vy5sO0=
+			eZkb5zeatTyHf+X86gjIDQy8rlwnOSm/oNsmzu6qz/Q=
 			</data>
 		</dict>
 		<key>Windows/vcruntime140.dll</key>
@@ -325,7 +314,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fFuCk2P5TjimKmU5nQbqxnMXDpzKWsTmS7lqVtZCASQ=
+			uuHrx/nfeWW0Wx14dMkgSDk8hytdgwQ1sb+1RkhzZBQ=
 			</data>
 		</dict>
 		<key>Windows64/vcruntime140.dll</key>
