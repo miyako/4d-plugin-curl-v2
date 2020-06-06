@@ -43,6 +43,11 @@ Less callbacks (``1/256``)
 
 [2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
 
+
+## Installation Instructions
+1. Extract either the **cURL.DMG** or the **cURL.zip** archives
+2. Add the **cURL.bundle** to your database's **Plugins** folder.
+
 ## Syntax
 
 ```
