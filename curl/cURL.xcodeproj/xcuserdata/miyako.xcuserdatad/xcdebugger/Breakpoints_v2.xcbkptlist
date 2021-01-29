@@ -33,7 +33,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2543"
             endingLineNumber = "2543"
-            landmarkName = "json_get_curl_option_c(curl, option, n)"
+            landmarkName = "json_get_curl_option_k(curl, option, n)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F3BE668-0EF0-4C00-BC8A-16032E8FC920"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "4DPlugin.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
+            landmarkName = "curl_header_function(buffer, size, nmemb, ctx)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
