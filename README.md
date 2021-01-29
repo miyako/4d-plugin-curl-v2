@@ -1,48 +1,12 @@
+![version](https://img.shields.io/badge/version-16%2B-8331AE)
+![platform](https://img.shields.io/static/v1?label=platform&message=osx-64%20|%20win-32%20|%20win-64&color=blue)
+[![license](https://img.shields.io/github/license/miyako/4d-plugin-curl-v2)](LICENSE)
+![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-curl-v2/total)
+
 # 4d-plugin-curl-v2
 Generic network client based on libcurl-7.62.0
 
-### Platform
-
-| carbon | cocoa | win32 | win64 |
-|:------:|:-----:|:---------:|:---------:|
-||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
-
-```
-spctl -a -vv -t install cURL.bundle: accepted
-source=Notarized Developer ID
-origin=Developer ID Application: keisuke miyako (Y69CWUC25B)
-```
-
 __Mac version is now 64-bit only!__ 
-
-use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for 32-bit support
-
-### Version
-
-<img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" /> <img src="https://user-images.githubusercontent.com/1725068/41266195-ddf767b2-6e30-11e8-9d6b-2adf6a9f57a5.png" width="32" height="32" />
-
-![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
-
-### Releases
-
-[3.1](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.1) fix SFTP infinite problem on windows 32-bit
-
-* Some major changes in 3.0
-
-Use ``jsoncpp`` instead of ``libjson``
-
-Less callbacks (``1/256``) 
-
-[3.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.2) 
-
-[2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
-
-[2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
-
-[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
-
-[2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
-
 
 ## Installation Instructions
 1. Extract either the **cURL.DMG** or the **cURL.zip** archives
