@@ -1,17 +1,10 @@
+![version](https://img.shields.io/badge/version-16%2B-8331AE)
+![platform](https://img.shields.io/static/v1?label=platform&message=osx-64%20|%20win-32%20|%20win-64&color=blue)
+[![license](https://img.shields.io/github/license/miyako/4d-plugin-curl-v2/curl)](LICENSE)
+![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-curl-v2/total)
+
 # 4d-plugin-curl-v2
 Generic network client based on libcurl-7.62.0
-
-### Platform
-
-| carbon | cocoa | win32 | win64 |
-|:------:|:-----:|:---------:|:---------:|
-||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
-
-```
-spctl -a -vv -t install cURL.bundle: accepted
-source=Notarized Developer ID
-origin=Developer ID Application: keisuke miyako (Y69CWUC25B)
-```
 
 __Mac version is now 64-bit only!__ 
 
