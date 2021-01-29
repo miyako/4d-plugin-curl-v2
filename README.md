@@ -8,25 +8,6 @@ Generic network client based on libcurl-7.62.0
 
 __Mac version is now 64-bit only!__ 
 
-use [carbon](https://github.com/miyako/4d-plugin-curl-v2/tree/carbon) branch for 32-bit support
-
-* Some major changes in 3.0
-
-Use ``jsoncpp`` instead of ``libjson``
-
-Less callbacks (``1/256``) 
-
-[3.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/3.2) 
-
-[2.8](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.8) added ``DEBUG`` option 
-
-[2.4](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.4) openssl ``1.1`` on windows
-
-[2.3](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.3)
-
-[2.2](https://github.com/miyako/4d-plugin-curl-v2/releases/tag/2.2)
-
-
 ## Installation Instructions
 1. Extract either the **cURL.DMG** or the **cURL.zip** archives
 2. Add the **cURL.bundle** to your database's **Plugins** folder.
