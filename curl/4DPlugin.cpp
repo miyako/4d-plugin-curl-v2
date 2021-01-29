@@ -952,7 +952,7 @@ BOOL curl_set_options(CURL *curl,
 						t.setUTF8String((const uint8_t *)value.c_str(), value.length());
 						CUTF16String _path;
 						t.copyUTF16String(&_path);
-                        request_path = (const PA_Unichar *)value.c_str();
+                        request_path = (const PA_Unichar *)_path.c_str();
 #endif
                     }
                         break;
@@ -970,7 +970,7 @@ BOOL curl_set_options(CURL *curl,
 						t.setUTF8String((const uint8_t *)value.c_str(), value.length());
 						CUTF16String _path;
 						t.copyUTF16String(&_path);
-						response_path = (const PA_Unichar *)value.c_str();
+						response_path = (const PA_Unichar *)_path.c_str();
 #endif
                     }
                         break;
@@ -2119,7 +2119,7 @@ CURLoption json_get_curl_option_name(JSONNODE *n)
 #define CHECK_CURLOPT(__a,__b) if(s==__a){v=(CURLoption)__b;goto json_get_curl_option_exit;}
 #else
         std::wstring s = std::wstring((const wchar_t *)name);
-#define CHECK_CURLOPT(__a,__b) if(s.compare(L__a)==0){v=__b;goto json_get_curl_option_exit;}
+#define CHECK_CURLOPT(a,b) if(s.compare(La)==0){v=b;goto json_get_curl_option_exit;}
 #endif
             /* special string */
             CHECK_CURLOPT("URL",CURLOPT_URL)
