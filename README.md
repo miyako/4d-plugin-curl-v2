@@ -6,6 +6,8 @@
 # 4d-plugin-curl-v2
 Generic network client based on libcurl-7.62.0
 
+**Note**: a [newer version](https://github.com/miyako/4d-plugin-curl-v3) is available
+
 __Mac version is now 64-bit only!__ 
 
 ## Installation Instructions
